@@ -69,6 +69,7 @@
       endInput:        document.getElementById( 'planner-end' ),
       endError:        document.getElementById( 'planner-end-error' ),
       btnOpenGmaps:    document.getElementById( 'btn-open-gmaps' ),
+      btnShare:        document.getElementById( 'btn-share' ),
       btnReset:        document.getElementById( 'btn-reset' ),
       formError:       document.getElementById( 'planner-form-error' ),
       startError:      document.getElementById( 'planner-start-error' ),
@@ -162,6 +163,11 @@
     // ---- Random route button ----
     if ( dom.btnRandom ) {
       dom.btnRandom.addEventListener( 'click', handleRandom );
+    }
+
+    // ---- Share button ----
+    if ( dom.btnShare ) {
+      dom.btnShare.addEventListener( 'click', handleShare );
     }
 
     // ---- Reset button ----
@@ -1080,6 +1086,33 @@
     dom.directionRadios.forEach( function ( r ) { r.checked = r.value === randomDir; } );
 
     generateRoute();
+  }
+
+  function handleShare() {
+    const url = dom.btnOpenGmaps ? dom.btnOpenGmaps.href : '';
+    if ( ! url || url === '#' ) return;
+
+    const shareData = {
+      title: 'RideLoop Route',
+      text:  'Check out this motorcycle route I generated on RideLoop!',
+      url:   url,
+    };
+
+    if ( navigator.share && navigator.canShare && navigator.canShare( shareData ) ) {
+      navigator.share( shareData ).catch( function () {} ); // user cancelled — silently ignore
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText( url ).then( function () {
+        const btn = dom.btnShare;
+        const original = btn.innerHTML;
+        btn.textContent = 'Copied!';
+        btn.disabled = true;
+        setTimeout( function () {
+          btn.innerHTML  = original;
+          btn.disabled   = false;
+        }, 2000 );
+      } ).catch( function () {} );
+    }
   }
 
   function handleReset() {

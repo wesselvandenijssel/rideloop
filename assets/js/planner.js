@@ -197,6 +197,9 @@
 			dom.btnReset.addEventListener("click", handleReset);
 		}
 
+		// ---- Step wizard ----
+		initStepNav();
+
 		// Note: geolocation is NOT triggered automatically on load.
 		// The GPS button (btn-geolocate) handles on-demand location requests.
 		// Auto-prompting caused the browser permission spinner to appear before
@@ -1776,6 +1779,59 @@
 		if ( code <= 86 )                        return 'Snow showers';
 		if ( code <= 99 )                        return 'Thunderstorm';
 		return 'Unknown';
+	}
+
+	// -----------------------------------------------------------------------
+	// Step Wizard Navigation
+	// -----------------------------------------------------------------------
+
+	let currentStep = 1;
+	const TOTAL_STEPS = 3;
+
+	function goToStep( n ) {
+		if ( n < 1 || n > TOTAL_STEPS ) return;
+		currentStep = n;
+
+		// Show/hide step panels
+		document.querySelectorAll( '.planner-step' ).forEach( function ( panel ) {
+			const step = parseInt( panel.dataset.step, 10 );
+			panel.classList.toggle( 'is-active', step === n );
+		} );
+
+		// Update step nav indicators
+		document.querySelectorAll( '.step-nav__item' ).forEach( function ( item ) {
+			const step = parseInt( item.dataset.step, 10 );
+			item.classList.remove( 'is-active', 'is-done' );
+			if ( step === n )       item.classList.add( 'is-active' );
+			else if ( step < n )    item.classList.add( 'is-done' );
+		} );
+	}
+
+	function initStepNav() {
+		// Wire Next buttons
+		document.querySelectorAll( '.btn-next' ).forEach( function ( btn ) {
+			btn.addEventListener( 'click', function () {
+				goToStep( currentStep + 1 );
+			} );
+		} );
+
+		// Wire Back buttons
+		document.querySelectorAll( '.btn-back' ).forEach( function ( btn ) {
+			btn.addEventListener( 'click', function () {
+				goToStep( currentStep - 1 );
+			} );
+		} );
+
+		// Clicking a completed step nav item jumps back to it
+		document.querySelectorAll( '.step-nav__item' ).forEach( function ( item ) {
+			item.addEventListener( 'click', function () {
+				const step = parseInt( item.dataset.step, 10 );
+				if ( step < currentStep ) goToStep( step );
+			} );
+		} );
+
+		// Start on step 1
+		goToStep( 1 );
 	}
 
 })();

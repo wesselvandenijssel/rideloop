@@ -363,6 +363,11 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                         <ol id="waypoint-list" class="waypoint-list"></ol>
                     </div>
 
+                    <div id="poi-section" class="route-summary__poi-section" hidden>
+                        <h3 class="route-summary__section-title">Points of Interest</h3>
+                        <ul id="poi-list" class="poi-list"></ul>
+                    </div>
+
                     <a
                         id="btn-open-gmaps"
                         href="#"

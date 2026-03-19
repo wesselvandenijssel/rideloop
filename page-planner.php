@@ -104,236 +104,279 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
 
                 <form id="rideloop-planner-form" class="planner-form" novalidate>
 
-                    <!-- Plan by Time or Distance -->
-                    <div class="form-group">
-                        <label class="form-label">Plan by</label>
-                        <div class="mode-toggle">
-                            <label class="mode-btn">
-                                <input type="radio" name="plan_mode" value="time" checked>
-                                <span>Time</span>
-                            </label>
-                            <label class="mode-btn">
-                                <input type="radio" name="plan_mode" value="distance">
-                                <span>Distance</span>
-                            </label>
+                    <!-- Step indicator nav -->
+                    <nav class="step-nav" aria-label="Form steps">
+                        <div class="step-nav__item is-active" data-step="1">
+                            <div class="step-nav__num">1</div>
+                            <div class="step-nav__label">Distance</div>
                         </div>
-                    </div>
+                        <div class="step-nav__line" aria-hidden="true"></div>
+                        <div class="step-nav__item" data-step="2">
+                            <div class="step-nav__num">2</div>
+                            <div class="step-nav__label">Roads</div>
+                        </div>
+                        <div class="step-nav__line" aria-hidden="true"></div>
+                        <div class="step-nav__item" data-step="3">
+                            <div class="step-nav__num">3</div>
+                            <div class="step-nav__label">Details</div>
+                        </div>
+                    </nav>
 
-                    <!-- Trip Duration (shown in time mode) -->
-                    <div class="form-group" id="duration-group">
-                        <label class="form-label" for="planner-duration">Approximate Trip Duration</label>
-                        <select id="planner-duration" name="duration" class="form-select">
-                            <option value="1h">~1 hour</option>
-                            <option value="2h" selected>~2 hours</option>
-                            <option value="3h">~3 hours</option>
-                            <option value="half-day">Half day (~4–5 hours)</option>
-                            <option value="full-day">Full day (~7–8 hours)</option>
-                        </select>
-                    </div>
+                    <!-- Step 1: Distance -->
+                    <div class="planner-step is-active" data-step="1">
 
-                    <!-- Trip Distance (shown in distance mode) -->
-                    <div class="form-group" id="distance-group" hidden>
-                        <label class="form-label" for="planner-distance">Trip Distance</label>
-                        <div class="distance-input-wrap">
-                            <input
-                                type="number"
-                                id="planner-distance"
-                                name="distance"
-                                class="form-input"
-                                min="20"
-                                max="1200"
-                                step="10"
-                                value="150"
-                                placeholder="150"
+                        <!-- Plan by Time or Distance -->
+                        <div class="form-group">
+                            <label class="form-label">Plan by</label>
+                            <div class="mode-toggle">
+                                <label class="mode-btn">
+                                    <input type="radio" name="plan_mode" value="time" checked>
+                                    <span>Time</span>
+                                </label>
+                                <label class="mode-btn">
+                                    <input type="radio" name="plan_mode" value="distance">
+                                    <span>Distance</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Trip Duration (shown in time mode) -->
+                        <div class="form-group" id="duration-group">
+                            <label class="form-label" for="planner-duration">Approximate Trip Duration</label>
+                            <select id="planner-duration" name="duration" class="form-select">
+                                <option value="1h">~1 hour</option>
+                                <option value="2h" selected>~2 hours</option>
+                                <option value="3h">~3 hours</option>
+                                <option value="half-day">Half day (~4–5 hours)</option>
+                                <option value="full-day">Full day (~7–8 hours)</option>
+                            </select>
+                        </div>
+
+                        <!-- Trip Distance (shown in distance mode) -->
+                        <div class="form-group" id="distance-group" hidden>
+                            <label class="form-label" for="planner-distance">Trip Distance</label>
+                            <div class="distance-input-wrap">
+                                <input
+                                    type="number"
+                                    id="planner-distance"
+                                    name="distance"
+                                    class="form-input"
+                                    min="20"
+                                    max="1200"
+                                    step="10"
+                                    value="150"
+                                    placeholder="150"
+                                >
+                                <span class="input-unit">km</span>
+                            </div>
+                            <p class="form-hint">Enter the total round-trip distance (20–1200 km).</p>
+                        </div>
+
+                        <div class="step-footer">
+                            <button type="button" class="btn btn--primary btn--full btn-next">Next &rarr;</button>
+                        </div>
+
+                    </div><!-- step 1 -->
+
+                    <!-- Step 2: Roads -->
+                    <div class="planner-step" data-step="2">
+
+                        <!-- Road Preference -->
+                        <div class="form-group">
+                            <fieldset>
+                                <legend class="form-label">Road Preference</legend>
+                                <div class="radio-group">
+
+                                    <label class="radio-label">
+                                        <input type="radio" name="road_pref" value="extra-curvy">
+                                        <span class="radio-custom"></span>
+                                        <span>
+                                            <strong>Extra Curvy</strong>
+                                            <small>Max turns, tight loops, winding paths</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="radio-label">
+                                        <input type="radio" name="road_pref" value="twisties" checked>
+                                        <span class="radio-custom"></span>
+                                        <span>
+                                            <strong>Twisties / Scenic</strong>
+                                            <small>Backroads with character</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="radio-label">
+                                        <input type="radio" name="road_pref" value="mixed">
+                                        <span class="radio-custom"></span>
+                                        <span>
+                                            <strong>Mixed</strong>
+                                            <small>Balance of fast and scenic</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="radio-label">
+                                        <input type="radio" name="road_pref" value="highway">
+                                        <span class="radio-custom"></span>
+                                        <span>
+                                            <strong>Highways</strong>
+                                            <small>Fast, direct roads</small>
+                                        </span>
+                                    </label>
+
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <!-- Scenery / Terrain -->
+                        <div class="form-group">
+                            <fieldset>
+                                <legend class="form-label">Scenery / Terrain</legend>
+                                <div class="radio-group">
+
+                                    <label class="radio-label">
+                                        <input type="radio" name="scenery" value="any" checked>
+                                        <span class="radio-custom"></span>
+                                        <span>
+                                            <strong>Any</strong>
+                                            <small>No terrain preference</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="radio-label">
+                                        <input type="radio" name="scenery" value="forest">
+                                        <span class="radio-custom"></span>
+                                        <span>
+                                            <strong>Forest &amp; Woodland</strong>
+                                            <small>Routes through wooded areas</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="radio-label">
+                                        <input type="radio" name="scenery" value="water">
+                                        <span class="radio-custom"></span>
+                                        <span>
+                                            <strong>Lakes &amp; Rivers</strong>
+                                            <small>Follow waterways and coastlines</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="radio-label">
+                                        <input type="radio" name="scenery" value="heide">
+                                        <span class="radio-custom"></span>
+                                        <span>
+                                            <strong>Heathland (Heide)</strong>
+                                            <small>Open heather and moorland</small>
+                                        </span>
+                                    </label>
+
+                                    <label class="radio-label">
+                                        <input type="radio" name="scenery" value="offroad">
+                                        <span class="radio-custom"></span>
+                                        <span>
+                                            <strong>Offroad &amp; Gravel</strong>
+                                            <small>Includes unpaved tracks and gravel paths</small>
+                                        </span>
+                                    </label>
+
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="step-footer">
+                            <button type="button" class="btn btn--ghost btn-back">&larr; Back</button>
+                            <button type="button" class="btn btn--primary btn-next">Next &rarr;</button>
+                        </div>
+
+                    </div><!-- step 2 -->
+
+                    <!-- Step 3: Details + Generate -->
+                    <div class="planner-step" data-step="3">
+
+                        <!-- Direction Bias -->
+                        <div class="form-group">
+                            <label class="form-label">Head towards</label>
+                            <div class="direction-picker">
+                                <label class="dir-btn">
+                                    <input type="radio" name="direction" value="any" checked>
+                                    <span>Any</span>
+                                </label>
+                                <label class="dir-btn">
+                                    <input type="radio" name="direction" value="north">
+                                    <span>N</span>
+                                </label>
+                                <label class="dir-btn">
+                                    <input type="radio" name="direction" value="east">
+                                    <span>E</span>
+                                </label>
+                                <label class="dir-btn">
+                                    <input type="radio" name="direction" value="south">
+                                    <span>S</span>
+                                </label>
+                                <label class="dir-btn">
+                                    <input type="radio" name="direction" value="west">
+                                    <span>W</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Avoid Options -->
+                        <div class="form-group">
+                            <fieldset>
+                                <legend class="form-label">Avoid</legend>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="avoid" value="highways" id="avoid-highways">
+                                        <span class="checkbox-custom"></span>
+                                        Highways / Motorways
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="avoid" value="tolls" id="avoid-tolls">
+                                        <span class="checkbox-custom"></span>
+                                        Tolls
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="avoid" value="ferries" id="avoid-ferries">
+                                        <span class="checkbox-custom"></span>
+                                        Ferries
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="avoid" value="unpaved" id="avoid-unpaved" checked>
+                                        <span class="checkbox-custom"></span>
+                                        Unpaved Roads
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <div class="generate-row">
+                            <button type="button" class="btn btn--ghost btn-back">&larr; Back</button>
+                            <button
+                                type="submit"
+                                id="btn-generate"
+                                class="btn btn--primary btn--lg"
+                                <?php echo ! $has_api_key ? 'disabled' : ''; ?>
                             >
-                            <span class="input-unit">km</span>
+                                <span class="btn__text">Generate Route</span>
+                                <span class="btn__spinner" aria-hidden="true" hidden></span>
+                            </button>
+                            <button
+                                type="button"
+                                id="btn-random"
+                                class="btn btn--ghost btn--icon-label"
+                                title="Generate a route with random settings"
+                                aria-label="Random route"
+                                <?php echo ! $has_api_key ? 'disabled' : ''; ?>
+                            >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
+                                    <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
+                                </svg>
+                                Random
+                            </button>
                         </div>
-                        <p class="form-hint">Enter the total round-trip distance (20–1200 km).</p>
-                    </div>
 
-                    <!-- Road Preference -->
-                    <div class="form-group">
-                        <fieldset>
-                            <legend class="form-label">Road Preference</legend>
-                            <div class="radio-group">
-
-                                <label class="radio-label">
-                                    <input type="radio" name="road_pref" value="extra-curvy">
-                                    <span class="radio-custom"></span>
-                                    <span>
-                                        <strong>Extra Curvy</strong>
-                                        <small>Max turns, tight loops, winding paths</small>
-                                    </span>
-                                </label>
-
-                                <label class="radio-label">
-                                    <input type="radio" name="road_pref" value="twisties" checked>
-                                    <span class="radio-custom"></span>
-                                    <span>
-                                        <strong>Twisties / Scenic</strong>
-                                        <small>Backroads with character</small>
-                                    </span>
-                                </label>
-
-                                <label class="radio-label">
-                                    <input type="radio" name="road_pref" value="mixed">
-                                    <span class="radio-custom"></span>
-                                    <span>
-                                        <strong>Mixed</strong>
-                                        <small>Balance of fast and scenic</small>
-                                    </span>
-                                </label>
-
-                                <label class="radio-label">
-                                    <input type="radio" name="road_pref" value="highway">
-                                    <span class="radio-custom"></span>
-                                    <span>
-                                        <strong>Highways</strong>
-                                        <small>Fast, direct roads</small>
-                                    </span>
-                                </label>
-
-                            </div>
-                        </fieldset>
-                    </div>
-
-                    <!-- Scenery / Terrain -->
-                    <div class="form-group">
-                        <fieldset>
-                            <legend class="form-label">Scenery / Terrain</legend>
-                            <div class="radio-group">
-
-                                <label class="radio-label">
-                                    <input type="radio" name="scenery" value="any" checked>
-                                    <span class="radio-custom"></span>
-                                    <span>
-                                        <strong>Any</strong>
-                                        <small>No terrain preference</small>
-                                    </span>
-                                </label>
-
-                                <label class="radio-label">
-                                    <input type="radio" name="scenery" value="forest">
-                                    <span class="radio-custom"></span>
-                                    <span>
-                                        <strong>Forest &amp; Woodland</strong>
-                                        <small>Routes through wooded areas</small>
-                                    </span>
-                                </label>
-
-                                <label class="radio-label">
-                                    <input type="radio" name="scenery" value="water">
-                                    <span class="radio-custom"></span>
-                                    <span>
-                                        <strong>Lakes &amp; Rivers</strong>
-                                        <small>Follow waterways and coastlines</small>
-                                    </span>
-                                </label>
-
-                                <label class="radio-label">
-                                    <input type="radio" name="scenery" value="heide">
-                                    <span class="radio-custom"></span>
-                                    <span>
-                                        <strong>Heathland (Heide)</strong>
-                                        <small>Open heather and moorland</small>
-                                    </span>
-                                </label>
-
-                                <label class="radio-label">
-                                    <input type="radio" name="scenery" value="offroad">
-                                    <span class="radio-custom"></span>
-                                    <span>
-                                        <strong>Offroad &amp; Gravel</strong>
-                                        <small>Includes unpaved tracks and gravel paths</small>
-                                    </span>
-                                </label>
-
-                            </div>
-                        </fieldset>
-                    </div>
-
-                    <!-- Direction Bias -->
-                    <div class="form-group">
-                        <label class="form-label">Head towards</label>
-                        <div class="direction-picker">
-                            <label class="dir-btn">
-                                <input type="radio" name="direction" value="any" checked>
-                                <span>Any</span>
-                            </label>
-                            <label class="dir-btn">
-                                <input type="radio" name="direction" value="north">
-                                <span>N</span>
-                            </label>
-                            <label class="dir-btn">
-                                <input type="radio" name="direction" value="east">
-                                <span>E</span>
-                            </label>
-                            <label class="dir-btn">
-                                <input type="radio" name="direction" value="south">
-                                <span>S</span>
-                            </label>
-                            <label class="dir-btn">
-                                <input type="radio" name="direction" value="west">
-                                <span>W</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Avoid Options -->
-                    <div class="form-group">
-                        <fieldset>
-                            <legend class="form-label">Avoid</legend>
-                            <div class="checkbox-group">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="avoid" value="highways" id="avoid-highways">
-                                    <span class="checkbox-custom"></span>
-                                    Highways / Motorways
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="avoid" value="tolls" id="avoid-tolls">
-                                    <span class="checkbox-custom"></span>
-                                    Tolls
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="avoid" value="ferries" id="avoid-ferries">
-                                    <span class="checkbox-custom"></span>
-                                    Ferries
-                                </label>
-                                <label class="checkbox-label">
-                                    <input type="checkbox" name="avoid" value="unpaved" id="avoid-unpaved" checked>
-                                    <span class="checkbox-custom"></span>
-                                    Unpaved Roads
-                                </label>
-                            </div>
-                        </fieldset>
-                    </div>
-
-                    <!-- Generate Button -->
-                    <div class="generate-row">
-                        <button
-                            type="submit"
-                            id="btn-generate"
-                            class="btn btn--primary btn--full btn--lg"
-                            <?php echo ! $has_api_key ? 'disabled' : ''; ?>
-                        >
-                            <span class="btn__text">Generate Route</span>
-                            <span class="btn__spinner" aria-hidden="true" hidden></span>
-                        </button>
-                        <button
-                            type="button"
-                            id="btn-random"
-                            class="btn btn--ghost btn--icon-label"
-                            title="Generate a route with random settings"
-                            aria-label="Random route"
-                            <?php echo ! $has_api_key ? 'disabled' : ''; ?>
-                        >
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
-                                <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
-                            </svg>
-                            Random
-                        </button>
-                    </div>
+                    </div><!-- step 3 -->
 
                     <div id="planner-form-error" class="form-error form-error--general" role="alert" aria-live="assertive" hidden></div>
 
@@ -398,6 +441,8 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                         </svg>
                         Open in Google Maps
                     </a>
+
+                    <div id="gmaps-tip" class="gmaps-tip" hidden></div>
 
                     <div class="route-summary__actions">
                         <button id="btn-share" class="btn btn--outline btn--full" type="button" aria-label="Share this route">

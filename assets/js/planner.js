@@ -96,6 +96,7 @@
 			elevationChart:   document.getElementById( 'elevation-chart' ),
 			elevationMin:     document.getElementById( 'elevation-min' ),
 			elevationMax:     document.getElementById( 'elevation-max' ),
+			gmapsTip: document.getElementById( 'gmaps-tip' ),
 			mapDiv: document.getElementById("rideloop-map"),
 			mapPlaceholder: document.getElementById("map-placeholder"),
 		};
@@ -196,6 +197,9 @@
 		if (dom.btnReset) {
 			dom.btnReset.addEventListener("click", handleReset);
 		}
+
+		// ---- Step wizard ----
+		initStepNav();
 
 		// Note: geolocation is NOT triggered automatically on load.
 		// The GPS button (btn-geolocate) handles on-demand location requests.
@@ -1092,6 +1096,31 @@
 
 		const url = "https://www.google.com/maps/dir/?" + params.toString();
 		dom.btnOpenGmaps.href = url;
+
+		// Show Google Maps setup tip after route is generated
+		if ( dom.gmapsTip ) {
+			const avoiding = [];
+			if ( dom.avoidHighways && dom.avoidHighways.checked ) avoiding.push( 'Highways' );
+			if ( dom.avoidTolls    && dom.avoidTolls.checked    ) avoiding.push( 'Tolls' );
+			if ( dom.avoidFerries  && dom.avoidFerries.checked  ) avoiding.push( 'Ferries' );
+
+			let avoidNote = '';
+			if ( avoiding.length ) {
+				const tags = avoiding.map( function ( a ) {
+					return '<span class="gmaps-tip__tag">' + a + '</span>';
+				} ).join( '' );
+				avoidNote = ' Under <strong>Avoid</strong> enable: ' + tags;
+			}
+
+			dom.gmapsTip.innerHTML =
+				'<div class="gmaps-tip__icon" aria-hidden="true">ℹ️</div>'
+				+ '<div class="gmaps-tip__body">'
+				+ '<strong>Tip: set route options in Google Maps</strong>'
+				+ '<p>After opening, tap <strong>&#8942; → Route options</strong> to configure driving preferences.'
+				+ avoidNote + '</p>'
+				+ '</div>';
+			dom.gmapsTip.hidden = false;
+		}
 	}
 
 	// -----------------------------------------------------------------------
@@ -1513,6 +1542,33 @@
 			}
 		});
 
+		// Collapse items beyond the 3rd with a slide-toggle
+		const items = dom.poiList.querySelectorAll( 'li' );
+		if ( items.length > 3 ) {
+			// Wrap overflow items in a collapsible container
+			const overflow = document.createElement( 'div' );
+			overflow.className = 'poi-overflow';
+			overflow.hidden = true;
+			for ( let i = 3; i < items.length; i++ ) {
+				overflow.appendChild( items[ i ] );
+			}
+			dom.poiList.after( overflow );
+
+			const toggle = document.createElement( 'button' );
+			toggle.type = 'button';
+			toggle.className = 'poi-toggle';
+			toggle.textContent = 'Show ' + ( items.length - 3 ) + ' more';
+			overflow.after( toggle );
+
+			toggle.addEventListener( 'click', function () {
+				const isOpen = ! overflow.hidden;
+				overflow.hidden = isOpen;
+				toggle.textContent = isOpen
+					? 'Show ' + ( items.length - 3 ) + ' more'
+					: 'Show less';
+			} );
+		}
+
 		dom.poiSection.hidden = false;
 	}
 
@@ -1629,8 +1685,15 @@
 		if (dom.waypointList) dom.waypointList.innerHTML = "";
 		if (dom.filterTags) dom.filterTags.innerHTML = "";
 		if (dom.poiList) dom.poiList.innerHTML = "";
-		if (dom.poiSection) dom.poiSection.hidden = true;
+		if (dom.poiSection) {
+			dom.poiSection.hidden = true;
+			const overflow = dom.poiSection.querySelector( '.poi-overflow' );
+			const toggle   = dom.poiSection.querySelector( '.poi-toggle' );
+			if ( overflow ) overflow.remove();
+			if ( toggle )   toggle.remove();
+		}
 		if (dom.btnOpenGmaps) dom.btnOpenGmaps.href = "#";
+		if (dom.gmapsTip) dom.gmapsTip.hidden = true;
 		if ( dom.weatherSection )   dom.weatherSection.hidden   = true;
 		if ( dom.weatherContent )   dom.weatherContent.innerHTML = '';
 		if ( dom.elevationSection ) dom.elevationSection.hidden  = true;
@@ -1776,6 +1839,59 @@
 		if ( code <= 86 )                        return 'Snow showers';
 		if ( code <= 99 )                        return 'Thunderstorm';
 		return 'Unknown';
+	}
+
+	// -----------------------------------------------------------------------
+	// Step Wizard Navigation
+	// -----------------------------------------------------------------------
+
+	let currentStep = 1;
+	const TOTAL_STEPS = 3;
+
+	function goToStep( n ) {
+		if ( n < 1 || n > TOTAL_STEPS ) return;
+		currentStep = n;
+
+		// Show/hide step panels
+		document.querySelectorAll( '.planner-step' ).forEach( function ( panel ) {
+			const step = parseInt( panel.dataset.step, 10 );
+			panel.classList.toggle( 'is-active', step === n );
+		} );
+
+		// Update step nav indicators
+		document.querySelectorAll( '.step-nav__item' ).forEach( function ( item ) {
+			const step = parseInt( item.dataset.step, 10 );
+			item.classList.remove( 'is-active', 'is-done' );
+			if ( step === n )       item.classList.add( 'is-active' );
+			else if ( step < n )    item.classList.add( 'is-done' );
+		} );
+	}
+
+	function initStepNav() {
+		// Wire Next buttons
+		document.querySelectorAll( '.btn-next' ).forEach( function ( btn ) {
+			btn.addEventListener( 'click', function () {
+				goToStep( currentStep + 1 );
+			} );
+		} );
+
+		// Wire Back buttons
+		document.querySelectorAll( '.btn-back' ).forEach( function ( btn ) {
+			btn.addEventListener( 'click', function () {
+				goToStep( currentStep - 1 );
+			} );
+		} );
+
+		// Clicking a completed step nav item jumps back to it
+		document.querySelectorAll( '.step-nav__item' ).forEach( function ( item ) {
+			item.addEventListener( 'click', function () {
+				const step = parseInt( item.dataset.step, 10 );
+				if ( step < currentStep ) goToStep( step );
+			} );
+		} );
+
+		// Start on step 1
+		goToStep( 1 );
 	}
 
 })();

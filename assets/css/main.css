@@ -225,15 +225,7 @@ ol {
 	flex-shrink: 0;
 }
 
-/* Generate + Random side-by-side row */
-.generate-row {
-	display: flex;
-	gap: 8px;
-	align-items: stretch;
-}
-.generate-row .btn--primary {
-	flex: 1;
-}
+/* Generate + Random side-by-side row (now lives in step 3 footer) */
 
 /* Icon-only button */
 .btn--icon {
@@ -1809,4 +1801,187 @@ gmp-place-autocomplete::part(input) {
 .elevation-stat__value {
     color: var(--color-orange);
     font-weight: 600;
+}
+
+/* =========================================================================
+   Step Wizard
+   ========================================================================= */
+
+/* Step nav bar */
+.step-nav {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.step-nav__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    cursor: default;
+}
+
+.step-nav__num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    color: var(--color-text-muted);
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.step-nav__label {
+    font-size: 11px;
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+.step-nav__item.is-active .step-nav__num {
+    background: var(--color-orange);
+    border-color: var(--color-orange);
+    color: #fff;
+}
+
+.step-nav__item.is-active .step-nav__label {
+    color: var(--color-orange);
+    font-weight: 600;
+}
+
+.step-nav__item.is-done .step-nav__num {
+    background: rgba(255, 107, 0, 0.15);
+    border-color: var(--color-orange);
+    color: var(--color-orange);
+    cursor: pointer;
+}
+
+.step-nav__line {
+    flex: 1;
+    height: 2px;
+    background: var(--color-border);
+    margin: 14px 6px 0;
+    border-radius: 1px;
+}
+
+/* Step panels — only active one visible */
+.planner-step {
+    display: none;
+}
+
+.planner-step.is-active {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Footer with Back/Next buttons */
+.step-footer {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+}
+
+.step-footer .btn-next {
+    flex: 1;
+}
+
+/* Generate row in step 3 */
+.generate-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: stretch;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.generate-row .btn-back {
+    width: 100%;
+}
+
+.generate-row #btn-generate {
+    flex: 1;
+    min-width: 0;
+}
+
+/* POI overflow collapse */
+.poi-overflow {
+    overflow: hidden;
+}
+
+.poi-overflow[hidden] {
+    display: none;
+}
+
+.poi-toggle {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-orange);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.poi-toggle:hover {
+    background: rgba(255, 107, 0, 0.08);
+    border-color: var(--color-orange);
+}
+
+/* Google Maps tip */
+.gmaps-tip {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: rgba(255, 107, 0, 0.07);
+    border: 1px solid rgba(255, 107, 0, 0.25);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-top: 10px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+}
+
+.gmaps-tip__icon {
+    flex-shrink: 0;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.gmaps-tip__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.gmaps-tip__body p {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+}
+
+.gmaps-tip__tag {
+    display: inline-block;
+    background: rgba(255, 107, 0, 0.15);
+    color: var(--color-orange);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-weight: 600;
+    margin: 2px 2px 0 0;
 }

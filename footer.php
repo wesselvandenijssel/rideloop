@@ -20,6 +20,7 @@
                         <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
                         <li><a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>">Route Planner</a></li>
                         <li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a></li>
+                        <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
                     </ul>
                 </nav>
             </div>

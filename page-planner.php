@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: Planner
  *
@@ -16,30 +17,23 @@
 
 get_header();
 
-$has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
+$has_api_key = ! empty(get_option('rideloop_google_maps_api_key', ''));
 ?>
 
 <main id="main-content" class="site-main planner-page" role="main">
 
-    <div class="planner-page__header">
-        <div class="container">
-            <h1 class="planner-page__title">Route Planner</h1>
-            <p class="planner-page__subtitle">Build your perfect round-trip motorcycle loop.</p>
+    <?php if (! $has_api_key) : ?>
+        <div class="planner-notice planner-notice--warning">
+            <div class="container">
+                <p>
+                    <strong>Setup required:</strong>
+                    No Google Maps API key is configured.
+                    <?php if (current_user_can('manage_options')) : ?>
+                        <a href="<?php echo esc_url(admin_url('options-general.php?page=rideloop-settings')); ?>">Go to RideLoop Settings &rarr;</a>
+                    <?php endif; ?>
+                </p>
+            </div>
         </div>
-    </div>
-
-    <?php if ( ! $has_api_key ) : ?>
-    <div class="planner-notice planner-notice--warning">
-        <div class="container">
-            <p>
-                <strong>Setup required:</strong>
-                No Google Maps API key is configured.
-                <?php if ( current_user_can( 'manage_options' ) ) : ?>
-                    <a href="<?php echo esc_url( admin_url( 'options-general.php?page=rideloop-settings' ) ); ?>">Go to RideLoop Settings &rarr;</a>
-                <?php endif; ?>
-            </p>
-        </div>
-    </div>
     <?php endif; ?>
 
     <div class="planner-layout">
@@ -62,17 +56,15 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                         name="start_location"
                         class="form-input"
                         placeholder="Address, city, or landmark..."
-                        autocomplete="off"
-                    >
+                        autocomplete="off">
                     <button
                         type="button"
                         id="btn-geolocate"
                         class="btn btn--icon"
                         title="Use my current location"
-                        aria-label="Use my current location"
-                    >
+                        aria-label="Use my current location">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+                            <path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3A8.994 8.994 0 0013 3.06V1h-2v2.06A8.994 8.994 0 003.06 11H1v2h2.06A8.994 8.994 0 0011 20.94V23h2v-2.06A8.994 8.994 0 0020.94 13H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z" />
                         </svg>
                     </button>
                 </div>
@@ -93,8 +85,7 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                         name="end_location"
                         class="form-input"
                         placeholder="Leave blank for a round-trip loop..."
-                        autocomplete="off"
-                    >
+                        autocomplete="off">
                 </div>
                 <div id="planner-end-error" class="form-error" role="alert" aria-live="polite" hidden></div>
             </div><!-- .planner-end-wrap -->
@@ -165,8 +156,7 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                                     max="1200"
                                     step="10"
                                     value="150"
-                                    placeholder="150"
-                                >
+                                    placeholder="150">
                                 <span class="input-unit">km</span>
                             </div>
                             <p class="form-hint">Enter the total round-trip distance (20–1200 km).</p>
@@ -355,8 +345,7 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                                 type="submit"
                                 id="btn-generate"
                                 class="btn btn--primary btn--lg"
-                                <?php echo ! $has_api_key ? 'disabled' : ''; ?>
-                            >
+                                <?php echo ! $has_api_key ? 'disabled' : ''; ?>>
                                 <span class="btn__text">Generate Route</span>
                                 <span class="btn__spinner" aria-hidden="true" hidden></span>
                             </button>
@@ -366,11 +355,12 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                                 class="btn btn--ghost btn--icon-label"
                                 title="Generate a route with random settings"
                                 aria-label="Random route"
-                                <?php echo ! $has_api_key ? 'disabled' : ''; ?>
-                            >
+                                <?php echo ! $has_api_key ? 'disabled' : ''; ?>>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                    <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
-                                    <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
+                                    <polyline points="16 3 21 3 21 8" />
+                                    <line x1="4" y1="20" x2="21" y2="3" />
+                                    <polyline points="21 16 21 21 16 21" />
+                                    <line x1="15" y1="15" x2="21" y2="21" />
                                 </svg>
                                 Random
                             </button>
@@ -434,10 +424,9 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                         target="_blank"
                         rel="noopener noreferrer"
                         class="btn btn--gmaps btn--full"
-                        aria-label="Open this route in Google Maps (opens new tab)"
-                    >
+                        aria-label="Open this route in Google Maps (opens new tab)">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
                         </svg>
                         Open in Google Maps
                     </a>
@@ -447,8 +436,11 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                     <div class="route-summary__actions">
                         <button id="btn-share" class="btn btn--outline btn--full" type="button" aria-label="Share this route">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
-                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                                <circle cx="18" cy="5" r="3" />
+                                <circle cx="6" cy="12" r="3" />
+                                <circle cx="18" cy="19" r="3" />
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
                             </svg>
                             Share Route
                         </button>
@@ -468,13 +460,13 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
             <div id="map-placeholder" class="map-placeholder" aria-hidden="true">
                 <div class="map-placeholder__inner">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                        <circle cx="12" cy="10" r="3" />
                     </svg>
                     <p>
                         <?php echo $has_api_key
-                            ? esc_html__( 'Your route will appear here', 'rideloop' )
-                            : esc_html__( 'Map unavailable — API key not configured', 'rideloop' );
+                            ? esc_html__('Your route will appear here', 'rideloop')
+                            : esc_html__('Map unavailable — API key not configured', 'rideloop');
                         ?>
                     </p>
                 </div>

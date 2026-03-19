@@ -42,6 +42,7 @@
 		waypointLatLngs: [], // array of google.maps.LatLng used as waypoints
 		poiMarkers: [], // google.maps.Marker instances for POIs
 		poiInfoWindow: null, // shared InfoWindow for POI tooltips
+		elevationService: null,
 	};
 
 	// -----------------------------------------------------------------------
@@ -89,6 +90,12 @@
 			waypointList: document.getElementById("waypoint-list"),
 			poiSection: document.getElementById("poi-section"),
 			poiList: document.getElementById("poi-list"),
+			weatherSection:   document.getElementById( 'weather-section' ),
+			weatherContent:   document.getElementById( 'weather-content' ),
+			elevationSection: document.getElementById( 'elevation-section' ),
+			elevationChart:   document.getElementById( 'elevation-chart' ),
+			elevationMin:     document.getElementById( 'elevation-min' ),
+			elevationMax:     document.getElementById( 'elevation-max' ),
 			mapDiv: document.getElementById("rideloop-map"),
 			mapPlaceholder: document.getElementById("map-placeholder"),
 		};
@@ -151,6 +158,8 @@
 				strokeOpacity: 0.85,
 			},
 		});
+
+		state.elevationService = new google.maps.ElevationService();
 
 		// ---- Places Autocomplete (new PlaceAutocompleteElement API) ----
 		// google.maps.places.Autocomplete is unavailable to accounts created after
@@ -678,6 +687,8 @@
 				displaySummary(result, waypointLatLngs);
 				buildGoogleMapsUrl(result);
 				findAndDisplayPois(result); // async — POIs load in the background
+				fetchElevationProfile( result );
+				fetchWeather( state.startLatLng );
 				return;
 			}
 
@@ -1620,6 +1631,12 @@
 		if (dom.poiList) dom.poiList.innerHTML = "";
 		if (dom.poiSection) dom.poiSection.hidden = true;
 		if (dom.btnOpenGmaps) dom.btnOpenGmaps.href = "#";
+		if ( dom.weatherSection )   dom.weatherSection.hidden   = true;
+		if ( dom.weatherContent )   dom.weatherContent.innerHTML = '';
+		if ( dom.elevationSection ) dom.elevationSection.hidden  = true;
+		if ( dom.elevationChart )   dom.elevationChart.innerHTML = '';
+		if ( dom.elevationMin )     dom.elevationMin.textContent  = '—';
+		if ( dom.elevationMax )     dom.elevationMax.textContent  = '—';
 		clearPoiMarkers();
 	}
 
@@ -1627,4 +1644,138 @@
 	// Graceful degradation: if no API key, the Maps API is not loaded at all.
 	// The page still renders with the placeholder and a warning notice.
 	// -----------------------------------------------------------------------
+
+	// -----------------------------------------------------------------------
+	// Elevation Profile
+	// -----------------------------------------------------------------------
+
+	function fetchElevationProfile( result ) {
+		if ( ! state.elevationService || ! dom.elevationSection ) return;
+		const path = result.routes[ 0 ].overview_path;
+		if ( ! path || path.length === 0 ) return;
+
+		// Sample up to 256 points (API max is 512 per request)
+		const MAX_SAMPLES = 200;
+		const step = Math.max( 1, Math.floor( path.length / MAX_SAMPLES ) );
+		const sampled = path.filter( function ( _, i ) { return i % step === 0; } );
+
+		state.elevationService.getElevationAlongPath(
+			{ path: sampled, samples: Math.min( sampled.length, MAX_SAMPLES ) },
+			function ( results, status ) {
+				if ( status !== 'OK' || ! results || results.length === 0 ) return;
+				drawElevationChart( results );
+				dom.elevationSection.hidden = false;
+			}
+		);
+	}
+
+	function drawElevationChart( elevations ) {
+		if ( ! dom.elevationChart ) return;
+		const W = dom.elevationChart.parentElement.clientWidth || 280;
+		const H = 72;
+		const PT = 4, PR = 2, PB = 4, PL = 2;
+
+		const vals   = elevations.map( function ( e ) { return e.elevation; } );
+		const minE   = Math.min.apply( null, vals );
+		const maxE   = Math.max.apply( null, vals );
+		const range  = maxE - minE || 1;
+		const n      = vals.length;
+
+		function xp( i )   { return PL + ( i / ( n - 1 ) ) * ( W - PL - PR ); }
+		function yp( v )   { return H - PB - ( ( v - minE ) / range ) * ( H - PT - PB ); }
+
+		const linePts  = vals.map( function ( v, i ) { return xp(i) + ',' + yp(v); } ).join( ' ' );
+		const areaBase = H - PB;
+		const areaPts  = xp(0) + ',' + areaBase + ' ' + linePts + ' ' + xp(n-1) + ',' + areaBase;
+
+		dom.elevationChart.setAttribute( 'viewBox', '0 0 ' + W + ' ' + H );
+		dom.elevationChart.setAttribute( 'width',   W );
+		dom.elevationChart.setAttribute( 'height',  H );
+		dom.elevationChart.innerHTML = [
+			'<defs>',
+			'  <linearGradient id="eg" x1="0" y1="0" x2="0" y2="1">',
+			'    <stop offset="0%" stop-color="#FF6B00" stop-opacity="0.35"/>',
+			'    <stop offset="100%" stop-color="#FF6B00" stop-opacity="0.03"/>',
+			'  </linearGradient>',
+			'</defs>',
+			'<polygon points="' + areaPts + '" fill="url(#eg)"/>',
+			'<polyline points="' + linePts + '" fill="none" stroke="#FF6B00" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>',
+		].join( '' );
+
+		if ( dom.elevationMin ) dom.elevationMin.textContent = Math.round( minE ) + ' m';
+		if ( dom.elevationMax ) dom.elevationMax.textContent = Math.round( maxE ) + ' m';
+	}
+
+	// -----------------------------------------------------------------------
+	// Weather Summary
+	// -----------------------------------------------------------------------
+
+	async function fetchWeather( latlng ) {
+		if ( ! dom.weatherSection || ! dom.weatherContent ) return;
+		if ( ! latlng ) return;
+
+		const lat = latlng.lat();
+		const lng = latlng.lng();
+		const url = 'https://api.open-meteo.com/v1/forecast'
+			+ '?latitude='  + lat
+			+ '&longitude=' + lng
+			+ '&current=temperature_2m,apparent_temperature,weathercode,windspeed_10m'
+			+ '&wind_speed_unit=kmh'
+			+ '&timezone=auto';
+
+		try {
+			const res  = await fetch( url );
+			if ( ! res.ok ) return;
+			const data = await res.json();
+			const c    = data.current;
+			if ( ! c ) return;
+
+			const code   = c.weathercode;
+			const temp   = Math.round( c.temperature_2m );
+			const feels  = Math.round( c.apparent_temperature );
+			const wind   = Math.round( c.windspeed_10m );
+			const icon   = wmoIcon( code );
+			const label  = wmoLabel( code );
+
+			dom.weatherContent.innerHTML =
+				'<div class="weather-icon">' + icon + '</div>'
+			+ '<div class="weather-details">'
+			+   '<span class="weather-temp">' + temp + '°C</span>'
+			+   '<span class="weather-label">' + label + '</span>'
+			+   '<span class="weather-meta">Feels ' + feels + '°C &middot; Wind ' + wind + ' km/h</span>'
+			+ '</div>';
+
+			dom.weatherSection.hidden = false;
+		} catch ( e ) { /* weather is non-critical — fail silently */ }
+	}
+
+	function wmoIcon( code ) {
+		if ( code === 0 )                        return '☀️';
+		if ( code <= 2 )                         return '⛅';
+		if ( code === 3 )                        return '☁️';
+		if ( code <= 49 )                        return '🌫️';
+		if ( code <= 57 )                        return '🌦️';
+		if ( code <= 67 )                        return '🌧️';
+		if ( code <= 77 )                        return '❄️';
+		if ( code <= 82 )                        return '🌦️';
+		if ( code <= 86 )                        return '🌨️';
+		if ( code <= 99 )                        return '⛈️';
+		return '🌡️';
+	}
+
+	function wmoLabel( code ) {
+		if ( code === 0 )                        return 'Clear sky';
+		if ( code === 1 )                        return 'Mostly clear';
+		if ( code === 2 )                        return 'Partly cloudy';
+		if ( code === 3 )                        return 'Overcast';
+		if ( code <= 49 )                        return 'Foggy';
+		if ( code <= 57 )                        return 'Drizzle';
+		if ( code <= 67 )                        return 'Rain';
+		if ( code <= 77 )                        return 'Snow';
+		if ( code <= 82 )                        return 'Rain showers';
+		if ( code <= 86 )                        return 'Snow showers';
+		if ( code <= 99 )                        return 'Thunderstorm';
+		return 'Unknown';
+	}
+
 })();

@@ -358,9 +358,26 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                         </li>
                     </ul>
 
+                    <!-- Weather -->
+                    <div id="weather-section" class="route-summary__weather" hidden>
+                        <div id="weather-content" class="weather-card"></div>
+                    </div>
+
                     <div class="route-summary__waypoints-section">
                         <h3 class="route-summary__section-title">Loop Waypoints</h3>
                         <ol id="waypoint-list" class="waypoint-list"></ol>
+                    </div>
+
+                    <!-- Elevation profile -->
+                    <div id="elevation-section" class="route-summary__elevation" hidden>
+                        <h3 class="route-summary__section-title">Elevation Profile</h3>
+                        <div class="elevation-chart-wrap">
+                            <svg id="elevation-chart" class="elevation-chart" preserveAspectRatio="none" aria-hidden="true"></svg>
+                        </div>
+                        <div class="elevation-stats">
+                            <span class="elevation-stat"><span class="elevation-stat__label">Low</span> <span id="elevation-min" class="elevation-stat__value">—</span></span>
+                            <span class="elevation-stat"><span class="elevation-stat__label">High</span> <span id="elevation-max" class="elevation-stat__value">—</span></span>
+                        </div>
                     </div>
 
                     <div id="poi-section" class="route-summary__poi-section" hidden>

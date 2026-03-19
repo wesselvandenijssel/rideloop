@@ -96,6 +96,7 @@
 			elevationChart:   document.getElementById( 'elevation-chart' ),
 			elevationMin:     document.getElementById( 'elevation-min' ),
 			elevationMax:     document.getElementById( 'elevation-max' ),
+			gmapsTip: document.getElementById( 'gmaps-tip' ),
 			mapDiv: document.getElementById("rideloop-map"),
 			mapPlaceholder: document.getElementById("map-placeholder"),
 		};
@@ -1095,6 +1096,31 @@
 
 		const url = "https://www.google.com/maps/dir/?" + params.toString();
 		dom.btnOpenGmaps.href = url;
+
+		// Show Google Maps setup tip after route is generated
+		if ( dom.gmapsTip ) {
+			const avoiding = [];
+			if ( dom.avoidHighways && dom.avoidHighways.checked ) avoiding.push( 'Highways' );
+			if ( dom.avoidTolls    && dom.avoidTolls.checked    ) avoiding.push( 'Tolls' );
+			if ( dom.avoidFerries  && dom.avoidFerries.checked  ) avoiding.push( 'Ferries' );
+
+			let avoidNote = '';
+			if ( avoiding.length ) {
+				const tags = avoiding.map( function ( a ) {
+					return '<span class="gmaps-tip__tag">' + a + '</span>';
+				} ).join( '' );
+				avoidNote = ' Under <strong>Avoid</strong> enable: ' + tags;
+			}
+
+			dom.gmapsTip.innerHTML =
+				'<div class="gmaps-tip__icon" aria-hidden="true">ℹ️</div>'
+				+ '<div class="gmaps-tip__body">'
+				+ '<strong>Tip: set route options in Google Maps</strong>'
+				+ '<p>After opening, tap <strong>&#8942; → Route options</strong> to configure driving preferences.'
+				+ avoidNote + '</p>'
+				+ '</div>';
+			dom.gmapsTip.hidden = false;
+		}
 	}
 
 	// -----------------------------------------------------------------------
@@ -1667,6 +1693,7 @@
 			if ( toggle )   toggle.remove();
 		}
 		if (dom.btnOpenGmaps) dom.btnOpenGmaps.href = "#";
+		if (dom.gmapsTip) dom.gmapsTip.hidden = true;
 		if ( dom.weatherSection )   dom.weatherSection.hidden   = true;
 		if ( dom.weatherContent )   dom.weatherContent.innerHTML = '';
 		if ( dom.elevationSection ) dom.elevationSection.hidden  = true;

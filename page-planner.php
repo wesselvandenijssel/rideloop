@@ -442,6 +442,8 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                         Open in Google Maps
                     </a>
 
+                    <div id="gmaps-tip" class="gmaps-tip" hidden></div>
+
                     <div class="route-summary__actions">
                         <button id="btn-share" class="btn btn--outline btn--full" type="button" aria-label="Share this route">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">

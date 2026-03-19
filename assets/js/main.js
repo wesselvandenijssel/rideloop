@@ -61,16 +61,51 @@
   //  pre-fill the raw text here; the full geocoding happens after the user
   //  hits "Generate".)
   // -----------------------------------------------------------------------
-  const params = new URLSearchParams( window.location.search );
-  const startParam = params.get( 'start_location' );
+  // -----------------------------------------------------------------------
+  // Hero Autocomplete — Google Maps callback for the front-page hero input
+  // -----------------------------------------------------------------------
+  window.rideloopInitHero = function () {
+    const input = document.getElementById( 'hero-location' );
+    if ( ! input ) return;
 
-  if ( startParam ) {
-    // If we're on the planner page and a location was passed from the hero
-    const plannerInput = document.getElementById( 'planner-start' );
-    if ( plannerInput ) {
-      plannerInput.value = decodeURIComponent( startParam );
+    if ( ! ( window.google && google.maps && google.maps.places && google.maps.places.PlaceAutocompleteElement ) ) {
+      return; // API not ready or PlaceAutocompleteElement unavailable — leave raw input as-is
     }
-  }
+
+    const placeAutoEl       = new google.maps.places.PlaceAutocompleteElement();
+    placeAutoEl.placeholder = input.placeholder;
+
+    // Insert the web component before the original input, then hide the input.
+    // The input keeps name="start_location" so the form GET submission works.
+    input.parentElement.insertBefore( placeAutoEl, input );
+    input.hidden = true;
+
+    // When the user picks a suggestion, sync immediately (sync write first so
+    // the hidden input is correct even if the form submits right away), then
+    // try to upgrade to the full formatted address via fetchFields (async).
+    placeAutoEl.addEventListener( 'gmp-placeselect', async function ( event ) {
+      input.value = placeAutoEl.value || '';  // sync — covers immediate form submit
+      try {
+        await event.place.fetchFields( { fields: [ 'formattedAddress', 'displayName' ] } );
+        input.value = event.place.formattedAddress ||
+                      ( event.place.displayName && event.place.displayName.text ) ||
+                      placeAutoEl.value || '';
+      } catch ( e ) { /* input.value already set above */ }
+    } );
+
+    // Keep hidden input in sync while the user types.
+    placeAutoEl.addEventListener( 'input', function () {
+      input.value = placeAutoEl.value;
+    } );
+
+    // Final safety net on submit: always read the element's current display value.
+    const form = input.closest( 'form' );
+    if ( form ) {
+      form.addEventListener( 'submit', function () {
+        input.value = placeAutoEl.value || input.value;
+      } );
+    }
+  };
 
   // -----------------------------------------------------------------------
   // Smooth Scroll — for anchor links within the same page

@@ -239,6 +239,16 @@
       state.startLatLng  = null;
       state.startAddress = '';
     } );
+
+    // Pre-fill from ?start_location= URL param (passed from the hero form).
+    // Must run here — after the element exists — because the Maps API loads async.
+    const urlParams   = new URLSearchParams( window.location.search );
+    const startParam  = urlParams.get( 'start_location' );
+    if ( startParam ) {
+      const decoded = decodeURIComponent( startParam );
+      placeAutoEl.value    = decoded;
+      dom.startInput.value = decoded;
+    }
   }
 
   /**

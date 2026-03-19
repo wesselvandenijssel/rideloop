@@ -72,6 +72,7 @@
       summaryDistance: document.getElementById( 'summary-distance' ),
       summaryDuration: document.getElementById( 'summary-duration' ),
       summaryWaypoints: document.getElementById( 'summary-waypoints' ),
+      filterTags:      document.getElementById( 'route-filter-tags' ),
       waypointList:    document.getElementById( 'waypoint-list' ),
       mapDiv:          document.getElementById( 'rideloop-map' ),
       mapPlaceholder:  document.getElementById( 'map-placeholder' ),
@@ -763,6 +764,59 @@
       }
     } );
 
+    // Filter tags
+    if ( dom.filterTags ) {
+      dom.filterTags.innerHTML = '';
+
+      const planMode = getSelectedRadio( dom.planModeRadios );
+      const roadPref = getSelectedRadio( dom.roadPrefRadios );
+      const scenery  = getSelectedRadio( dom.sceneryRadios );
+      const dir      = getSelectedRadio( dom.directionRadios );
+
+      const durationLabels = {
+        '1h': '1 hour', '2h': '2 hours', '3h': '3 hours',
+        'half-day': 'Half day', 'full-day': 'Full day',
+      };
+      const roadLabels = {
+        'extra-curvy': 'Extra Curvy', 'twisties': 'Twisties',
+        'mixed': 'Mixed', 'highway': 'Highway',
+      };
+      const sceneryLabels = {
+        'forest': 'Forest', 'water': 'Lakes & Rivers',
+        'heide': 'Heathland', 'offroad': 'Offroad',
+      };
+      const dirLabels = {
+        'north': 'North', 'east': 'East', 'south': 'South', 'west': 'West',
+      };
+
+      const tags = [];
+
+      if ( planMode === 'time' ) {
+        tags.push( durationLabels[ dom.durationSelect.value ] || dom.durationSelect.value );
+      } else {
+        tags.push( ( dom.distanceInput ? dom.distanceInput.value : '?' ) + ' km' );
+      }
+
+      tags.push( roadLabels[ roadPref ] || roadPref );
+
+      if ( scenery !== 'any' && sceneryLabels[ scenery ] ) tags.push( sceneryLabels[ scenery ] );
+      if ( dir !== 'any' && dirLabels[ dir ] )             tags.push( dirLabels[ dir ] );
+
+      if ( dom.avoidHighways && dom.avoidHighways.checked ) tags.push( 'No highways' );
+      if ( dom.avoidTolls    && dom.avoidTolls.checked    ) tags.push( 'No tolls' );
+      if ( dom.avoidFerries  && dom.avoidFerries.checked  ) tags.push( 'No ferries' );
+      if ( dom.avoidUnpaved  && dom.avoidUnpaved.checked  ) tags.push( 'No unpaved' );
+
+      if ( state.endAddress ) tags.push( 'To: ' + state.endAddress.split( ',' )[ 0 ] );
+
+      tags.forEach( function ( label ) {
+        const span = document.createElement( 'span' );
+        span.className   = 'filter-tag';
+        span.textContent = label;
+        dom.filterTags.appendChild( span );
+      } );
+    }
+
     // Show summary panel
     dom.routeSummary.hidden = false;
     // Scroll to summary in mobile view
@@ -986,6 +1040,7 @@
     if ( dom.summaryDuration )  dom.summaryDuration.textContent  = '—';
     if ( dom.summaryWaypoints ) dom.summaryWaypoints.textContent = '—';
     if ( dom.waypointList )     dom.waypointList.innerHTML       = '';
+    if ( dom.filterTags )       dom.filterTags.innerHTML         = '';
     if ( dom.btnOpenGmaps )     dom.btnOpenGmaps.href            = '#';
   }
 

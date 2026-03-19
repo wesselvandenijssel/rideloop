@@ -57,6 +57,24 @@ Tagline: **"Your next great ride starts here."**
 
 ---
 
+## Typography
+
+**Primary font:** Inter (Google Fonts) — used for all body text, UI labels, buttons, and headings.
+Fallback stack: `-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
+
+| Scale | Size | Usage |
+|---|---|---|
+| sm | 14px (0.875rem) | Hints, labels, fine print |
+| base | 16px (1rem) | Body text, form inputs |
+| lg | 18px (1.125rem) | Section subtitles, card text |
+| xl | 20px (1.25rem) | Small headings |
+| 2xl | 24px (1.5rem) | Section headings |
+| 3xl | 32px (2rem) | Page headings |
+
+**Style:** Clean, modern sans-serif. No decorative or display fonts. Weight varies from 400 (body) to 700 (headings and CTAs). The overall typographic feel is minimal and functional — legibility first, especially on small screens.
+
+---
+
 ## Tech stack (context only)
 
 - WordPress theme (PHP templates)

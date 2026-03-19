@@ -79,6 +79,26 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                 <div id="planner-start-error" class="form-error" role="alert" aria-live="polite" hidden></div>
             </div><!-- .planner-location-wrap -->
 
+            <!-- End-point input — also outside the scrollable body so the autocomplete
+                 dropdown is never clipped. Optional: leave blank for a round-trip loop. -->
+            <div class="planner-end-wrap">
+                <label class="form-label" for="planner-end">
+                    End Point
+                    <span class="form-label__optional">(optional)</span>
+                </label>
+                <div class="input-with-btn">
+                    <input
+                        type="text"
+                        id="planner-end"
+                        name="end_location"
+                        class="form-input"
+                        placeholder="Leave blank for a round-trip loop..."
+                        autocomplete="off"
+                    >
+                </div>
+                <div id="planner-end-error" class="form-error" role="alert" aria-live="polite" hidden></div>
+            </div><!-- .planner-end-wrap -->
+
             <!-- Scrollable panel body — all other form options + route summary -->
             <div class="planner-panel__body">
 

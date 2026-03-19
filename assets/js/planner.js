@@ -36,6 +36,8 @@
     autocomplete:     null,
     startLatLng:      null,  // google.maps.LatLng of the chosen start
     startAddress:     '',    // human-readable address string
+    endLatLng:        null,  // google.maps.LatLng of the optional end point
+    endAddress:       '',    // human-readable end address string
     currentRoute:     null,  // last DirectionsResult
     waypointLatLngs:  [],    // array of google.maps.LatLng used as waypoints
   };
@@ -64,6 +66,8 @@
       btnGenerate:     document.getElementById( 'btn-generate' ),
       btnRandom:       document.getElementById( 'btn-random' ),
       btnGeolocate:    document.getElementById( 'btn-geolocate' ),
+      endInput:        document.getElementById( 'planner-end' ),
+      endError:        document.getElementById( 'planner-end-error' ),
       btnOpenGmaps:    document.getElementById( 'btn-open-gmaps' ),
       btnReset:        document.getElementById( 'btn-reset' ),
       formError:       document.getElementById( 'planner-form-error' ),
@@ -137,6 +141,7 @@
     // google.maps.places.Autocomplete is unavailable to accounts created after
     // March 1 2025. We use PlaceAutocompleteElement (a web component) instead.
     initPlaceAutocomplete();
+    initEndPlaceAutocomplete();
 
     // ---- Geolocation button ----
     if ( dom.btnGeolocate ) {
@@ -236,6 +241,45 @@
     } );
   }
 
+  /**
+   * Same pattern as initPlaceAutocomplete but for the optional end point input.
+   */
+  function initEndPlaceAutocomplete() {
+    if ( ! dom.endInput ) return;
+    if ( ! google.maps.places.PlaceAutocompleteElement ) return;
+
+    const placeAutoEl = new google.maps.places.PlaceAutocompleteElement();
+    placeAutoEl.id          = 'planner-end-autocomplete';
+    placeAutoEl.placeholder = 'Leave blank for a round-trip loop...';
+
+    const wrapper = dom.endInput.closest( '.input-with-btn' );
+    wrapper.insertBefore( placeAutoEl, dom.endInput );
+    dom.endInput.hidden  = true;
+    dom.endInput.required = false;
+    dom.endInput.value   = '';
+
+    state.endAutocompleteEl = placeAutoEl;
+
+    placeAutoEl.addEventListener( 'gmp-placeselect', async function ( event ) {
+      const place = event.place;
+      try {
+        await place.fetchFields( { fields: [ 'displayName', 'formattedAddress', 'location' ] } );
+        state.endLatLng  = place.location;
+        state.endAddress = place.formattedAddress || place.displayName?.text || '';
+        dom.endInput.value = state.endAddress;
+        clearError( dom.endError );
+      } catch ( err ) {
+        state.endLatLng = null;
+        showError( dom.endError, 'Could not load place details — try selecting again.' );
+      }
+    } );
+
+    placeAutoEl.addEventListener( 'input', function () {
+      state.endLatLng  = null;
+      state.endAddress = '';
+    } );
+  }
+
   // -----------------------------------------------------------------------
   // Geolocation Handlers
   // -----------------------------------------------------------------------
@@ -330,6 +374,40 @@
         }
         state.startLatLng  = latlng;
         state.startAddress = address || rawInput;
+        geocodeEndThenGenerate();
+      } );
+    } else {
+      geocodeEndThenGenerate();
+    }
+  }
+
+  /**
+   * If an end location was typed but not resolved via autocomplete, geocode it.
+   * Then call generateRoute().
+   */
+  function geocodeEndThenGenerate() {
+    const rawEnd = (
+      state.endAutocompleteEl ? state.endAutocompleteEl.value : ( dom.endInput ? dom.endInput.value : '' )
+    ).trim();
+
+    // Field is empty — clear any previously resolved end point and generate a loop
+    if ( ! rawEnd ) {
+      state.endLatLng  = null;
+      state.endAddress = '';
+      generateRoute();
+      return;
+    }
+
+    if ( ! state.endLatLng ) {
+      setLoading( true );
+      geocodeAddress( rawEnd, function ( latlng, address ) {
+        if ( ! latlng ) {
+          setLoading( false );
+          showError( dom.endError, 'Could not find that end location. Please try a more specific address.' );
+          return;
+        }
+        state.endLatLng  = latlng;
+        state.endAddress = address || rawEnd;
         generateRoute();
       } );
     } else {
@@ -460,9 +538,10 @@
     // Previously we auto-enabled it for scenic preferences, but combined with
     // stopover:true it causes a 3× meander penalty that makes routes far too long.
     // Scenic variety is achieved through waypoint count and placement instead.
+    const destination = state.endLatLng || state.startLatLng; // loop if no end point
     const request = {
       origin:            state.startLatLng,
-      destination:       state.startLatLng,
+      destination:       destination,
       waypoints:         waypointLatLngs.map( function ( latlng ) {
         return { location: latlng, stopover: true };
       } ),
@@ -788,10 +867,11 @@
       return latlng.lat().toFixed( 6 ) + ',' + latlng.lng().toFixed( 6 );
     } );
 
+    const destinationAddress = state.endAddress || originAddress; // loop if no end point
     const params = new URLSearchParams( {
       api:         '1',
       origin:      originAddress,
-      destination: originAddress, // loop: same as origin
+      destination: destinationAddress,
       waypoints:   waypointStrings.join( '|' ),
       travelmode:  'driving',
     } );
@@ -871,6 +951,7 @@
 
   function clearAllErrors() {
     clearError( dom.startError );
+    clearError( dom.endError );
     clearError( dom.formError );
   }
 
@@ -941,10 +1022,14 @@
     // Clear form
     if ( dom.form ) dom.form.reset();
     dom.startInput.value = '';
-    if ( state.autocompleteEl ) state.autocompleteEl.value = '';
-    state.startLatLng    = null;
-    state.startAddress   = '';
-    state.currentRoute   = null;
+    if ( state.autocompleteEl )    state.autocompleteEl.value    = '';
+    if ( dom.endInput )            dom.endInput.value            = '';
+    if ( state.endAutocompleteEl ) state.endAutocompleteEl.value = '';
+    state.startLatLng     = null;
+    state.startAddress    = '';
+    state.endLatLng       = null;
+    state.endAddress      = '';
+    state.currentRoute    = null;
     state.waypointLatLngs = [];
 
     // Clear map route

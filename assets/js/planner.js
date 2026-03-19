@@ -40,6 +40,8 @@
     endAddress:       '',    // human-readable end address string
     currentRoute:     null,  // last DirectionsResult
     waypointLatLngs:  [],    // array of google.maps.LatLng used as waypoints
+    poiMarkers:       [],    // google.maps.Marker instances for POIs
+    poiInfoWindow:    null,  // shared InfoWindow for POI tooltips
   };
 
   // -----------------------------------------------------------------------
@@ -79,6 +81,8 @@
       summaryWaypoints: document.getElementById( 'summary-waypoints' ),
       filterTags:      document.getElementById( 'route-filter-tags' ),
       waypointList:    document.getElementById( 'waypoint-list' ),
+      poiSection:      document.getElementById( 'poi-section' ),
+      poiList:         document.getElementById( 'poi-list' ),
       mapDiv:          document.getElementById( 'rideloop-map' ),
       mapPlaceholder:  document.getElementById( 'map-placeholder' ),
     };
@@ -597,6 +601,7 @@
         displayRoute( result );
         displaySummary( result, waypointLatLngs );
         buildGoogleMapsUrl( result );
+        findAndDisplayPois( result ); // async — POIs load in the background
         return;
       }
 
@@ -1152,6 +1157,201 @@
     if ( dom.startInput ) dom.startInput.focus();
   }
 
+  // -----------------------------------------------------------------------
+  // Points of Interest — search, display, clear
+  // -----------------------------------------------------------------------
+
+  /**
+   * Sample 3 points from the route overview_path, search for tourist
+   * attractions/monuments near each, deduplicate, and show up to 6 as
+   * orange dot markers on the map plus a clickable list in the summary.
+   */
+  async function findAndDisplayPois( result ) {
+    clearPoiMarkers();
+    if ( ! dom.poiSection || ! dom.poiList ) return;
+    dom.poiList.innerHTML = '';
+    dom.poiSection.hidden = true;
+
+    const path = result.routes[ 0 ].overview_path;
+    if ( ! path || path.length === 0 ) return;
+
+    const samplePoints = [
+      path[ Math.floor( path.length * 0.125 ) ],
+      path[ Math.floor( path.length * 0.25  ) ],
+      path[ Math.floor( path.length * 0.375 ) ],
+      path[ Math.floor( path.length * 0.50  ) ],
+      path[ Math.floor( path.length * 0.625 ) ],
+      path[ Math.floor( path.length * 0.75  ) ],
+      path[ Math.floor( path.length * 0.875 ) ],
+    ];
+
+    if ( ! state.poiInfoWindow ) {
+      state.poiInfoWindow = new google.maps.InfoWindow();
+    }
+
+    const RADIUS_M  = 12000;
+    const MAX_TOTAL = 12;
+    const seen      = new Set();
+    const pois      = [];
+
+    for ( const center of samplePoints ) {
+      if ( pois.length >= MAX_TOTAL ) break;
+      const results = await searchPoisNear( center, RADIUS_M );
+      for ( const poi of results ) {
+        if ( pois.length >= MAX_TOTAL ) break;
+        const key = poi.name.toLowerCase().substring( 0, 20 );
+        if ( ! seen.has( key ) ) {
+          seen.add( key );
+          pois.push( poi );
+        }
+      }
+    }
+
+    if ( pois.length === 0 ) return;
+
+    pois.forEach( function ( poi ) { try {
+      const marker = new google.maps.Marker( {
+        position: poi.latlng,
+        map:      state.map,
+        title:    poi.name,
+        icon: {
+          path:         google.maps.SymbolPath.CIRCLE,
+          scale:        12,
+          fillColor:    '#FF6B00',
+          fillOpacity:  1,
+          strokeColor:  '#fff',
+          strokeWeight: 2.5,
+        },
+        zIndex: 30,
+      } );
+
+      function buildInfoContent() {
+        let html = '<div style="max-width:200px;font-family:sans-serif;line-height:1.4">';
+        if ( poi.photoUri ) {
+          html += '<img src="' + poi.photoUri + '" alt="" style="width:100%;height:90px;object-fit:cover;border-radius:4px;display:block;margin-bottom:6px">';
+        }
+        html += '<div style="font-size:13px;font-weight:700;margin-bottom:2px">' + poi.name + '</div>';
+        if ( poi.rating ) {
+          html += '<div style="font-size:12px;color:#888;margin-bottom:4px">&#9733; ' + poi.rating.toFixed(1) + '</div>';
+        }
+        if ( poi.website ) {
+          html += '<a href="' + poi.website + '" target="_blank" rel="noopener" style="font-size:12px;color:#FF6B00;text-decoration:none">Visit website ↗</a>';
+        }
+        html += '</div>';
+        return html;
+      }
+
+      marker.addListener( 'click', function () {
+        state.poiInfoWindow.setContent( buildInfoContent() );
+        state.poiInfoWindow.open( state.map, marker );
+      } );
+
+      state.poiMarkers.push( marker );
+
+      // List item
+      const li = document.createElement( 'li' );
+      li.className = 'poi-item';
+
+      const dot = document.createElement( 'span' );
+      dot.className = 'poi-item__dot';
+      dot.setAttribute( 'aria-hidden', 'true' );
+
+      const nameEl = document.createElement( 'span' );
+      nameEl.className   = 'poi-item__name';
+      nameEl.textContent = poi.name;
+
+      li.appendChild( dot );
+      li.appendChild( nameEl );
+
+      if ( poi.website ) {
+        const link = document.createElement( 'a' );
+        link.className  = 'poi-item__link';
+        link.href       = poi.website;
+        link.target     = '_blank';
+        link.rel        = 'noopener';
+        link.textContent = '↗';
+        link.title      = 'Visit website';
+        link.addEventListener( 'click', function ( e ) { e.stopPropagation(); } );
+        li.appendChild( link );
+      }
+
+      li.addEventListener( 'click', function () {
+        state.map.panTo( poi.latlng );
+        state.map.setZoom( 14 );
+        state.poiInfoWindow.setContent( buildInfoContent() );
+        state.poiInfoWindow.open( state.map, marker );
+      } );
+
+      dom.poiList.appendChild( li );
+    } catch ( err ) { console.error( '[POI] forEach error:', err ); } } );
+
+    dom.poiSection.hidden = false;
+  }
+
+  /**
+   * Search for tourist attractions/monuments near a point.
+   * Tries the new Places API first, falls back to legacy PlacesService.
+   */
+  async function searchPoisNear( center, radiusM ) {
+    const P = google.maps.places;
+    if ( ! P ) return [];
+
+    function mapPlace( p ) {
+      const name    = ( typeof p.displayName === 'string' ? p.displayName : p.displayName?.text ) || '';
+      const website = p.websiteURI || p.websiteUri || null;
+      const rating  = p.rating     || null;
+      const photoUri = p.photos && p.photos.length
+        ? ( p.photos[0].getURI ? p.photos[0].getURI( { maxWidth: 200, maxHeight: 120 } ) : null )
+        : null;
+      return { name, latlng: p.location, website, rating, photoUri };
+    }
+
+    // 1. Place.searchNearby — hard geo restriction, correct for nearby POIs
+    if ( P.Place && typeof P.Place.searchNearby === 'function' ) {
+      try {
+        const { places } = await P.Place.searchNearby( {
+          fields:              [ 'displayName', 'location', 'photos', 'websiteURI', 'rating' ],
+          locationRestriction: { center: center, radius: radiusM },
+          includedTypes:       [ 'tourist_attraction', 'museum', 'national_park', 'park', 'art_gallery', 'campground' ],
+          maxResultCount:      8,
+        } );
+        if ( places && places.length ) {
+          const mapped = places.map( mapPlace ).filter( function ( p ) { return p.name && p.latlng; } );
+          if ( mapped.length ) return mapped;
+        }
+      } catch ( e ) { console.warn( '[POI] searchNearby failed:', e ); }
+    }
+
+    // 2. Legacy PlacesService fallback
+    if ( P.PlacesService ) {
+      return new Promise( function ( resolve ) {
+        const svc = new P.PlacesService( state.map );
+        svc.nearbySearch(
+          { location: center, radius: radiusM, type: 'tourist_attraction' },
+          function ( results, status ) {
+            const OK = P.PlacesServiceStatus ? P.PlacesServiceStatus.OK : 'OK';
+            if ( status === OK && results && results.length ) {
+              resolve( results.slice( 0, 5 ).map( function ( r ) {
+                return { name: r.name || '', latlng: r.geometry.location };
+              } ).filter( function ( p ) { return p.name; } ) );
+            } else {
+              console.warn( '[POI] nearbySearch status:', status );
+              resolve( [] );
+            }
+          }
+        );
+      } );
+    }
+
+    return [];
+  }
+
+  function clearPoiMarkers() {
+    state.poiMarkers.forEach( function ( m ) { m.setMap( null ); } );
+    state.poiMarkers = [];
+    if ( state.poiInfoWindow ) state.poiInfoWindow.close();
+  }
+
   function clearRouteSummary() {
     if ( dom.routeSummary ) dom.routeSummary.hidden = true;
     if ( dom.summaryDistance )  dom.summaryDistance.textContent  = '—';
@@ -1159,7 +1359,10 @@
     if ( dom.summaryWaypoints ) dom.summaryWaypoints.textContent = '—';
     if ( dom.waypointList )     dom.waypointList.innerHTML       = '';
     if ( dom.filterTags )       dom.filterTags.innerHTML         = '';
+    if ( dom.poiList )          dom.poiList.innerHTML            = '';
+    if ( dom.poiSection )       dom.poiSection.hidden            = true;
     if ( dom.btnOpenGmaps )     dom.btnOpenGmaps.href            = '#';
+    clearPoiMarkers();
   }
 
   // -----------------------------------------------------------------------

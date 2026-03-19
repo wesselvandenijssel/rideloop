@@ -1516,6 +1516,33 @@
 			}
 		});
 
+		// Collapse items beyond the 3rd with a slide-toggle
+		const items = dom.poiList.querySelectorAll( 'li' );
+		if ( items.length > 3 ) {
+			// Wrap overflow items in a collapsible container
+			const overflow = document.createElement( 'div' );
+			overflow.className = 'poi-overflow';
+			overflow.hidden = true;
+			for ( let i = 3; i < items.length; i++ ) {
+				overflow.appendChild( items[ i ] );
+			}
+			dom.poiList.after( overflow );
+
+			const toggle = document.createElement( 'button' );
+			toggle.type = 'button';
+			toggle.className = 'poi-toggle';
+			toggle.textContent = 'Show ' + ( items.length - 3 ) + ' more';
+			overflow.after( toggle );
+
+			toggle.addEventListener( 'click', function () {
+				const isOpen = ! overflow.hidden;
+				overflow.hidden = isOpen;
+				toggle.textContent = isOpen
+					? 'Show ' + ( items.length - 3 ) + ' more'
+					: 'Show less';
+			} );
+		}
+
 		dom.poiSection.hidden = false;
 	}
 
@@ -1632,7 +1659,13 @@
 		if (dom.waypointList) dom.waypointList.innerHTML = "";
 		if (dom.filterTags) dom.filterTags.innerHTML = "";
 		if (dom.poiList) dom.poiList.innerHTML = "";
-		if (dom.poiSection) dom.poiSection.hidden = true;
+		if (dom.poiSection) {
+			dom.poiSection.hidden = true;
+			const overflow = dom.poiSection.querySelector( '.poi-overflow' );
+			const toggle   = dom.poiSection.querySelector( '.poi-toggle' );
+			if ( overflow ) overflow.remove();
+			if ( toggle )   toggle.remove();
+		}
 		if (dom.btnOpenGmaps) dom.btnOpenGmaps.href = "#";
 		if ( dom.weatherSection )   dom.weatherSection.hidden   = true;
 		if ( dom.weatherContent )   dom.weatherContent.innerHTML = '';

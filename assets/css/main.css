@@ -1913,3 +1913,33 @@ gmp-place-autocomplete::part(input) {
     flex: 1;
     min-width: 0;
 }
+
+/* POI overflow collapse */
+.poi-overflow {
+    overflow: hidden;
+}
+
+.poi-overflow[hidden] {
+    display: none;
+}
+
+.poi-toggle {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    color: var(--color-orange);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.poi-toggle:hover {
+    background: rgba(255, 107, 0, 0.08);
+    border-color: var(--color-orange);
+}

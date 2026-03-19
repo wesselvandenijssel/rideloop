@@ -19,6 +19,8 @@ You can also set an optional end point if you don't want a loop.
 - Optional custom end point
 - Preference filters: duration, road style, scenery, direction, avoid options
 - Points of Interest along the route (monuments, museums, parks, viewpoints) with photos, ratings, and website links
+- Elevation profile chart showing the terrain over the full route with low/high elevation stats
+- Live weather summary at the start location (condition, temperature, feels-like, wind speed)
 - Active filter tags shown after generating so you always know what settings were used
 - Share Route button (Web Share API with clipboard fallback)
 - Google Places autocomplete on all location inputs
@@ -79,5 +81,6 @@ Fallback stack: `-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
 
 - WordPress theme (PHP templates)
 - Vanilla JavaScript (no framework)
-- Google Maps JavaScript API (Directions, Places)
+- Google Maps JavaScript API (Directions, Places, Elevation)
+- Open-Meteo API for weather (free, no API key required)
 - CSS custom properties

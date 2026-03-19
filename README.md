@@ -2,7 +2,7 @@
 
 ## What is RideLoop?
 
-RideLoop is a free, no-account web app for motorcyclists who want a great ride without spending hours planning it. You enter a starting point, pick your preferences, and RideLoop generates a scenic round-trip loop — then lets you send it straight to Google Maps in one tap. Works with Android Auto and Apple CarPlay.
+RideLoop is a free, no-account web app for motorcyclists who want a great ride without spending hours planning it. You enter a starting point, pick your preferences, and RideLoop generates a scenic round-trip loop — then lets you send it straight to Google Maps in one tap.
 
 ## How it works
 
@@ -40,20 +40,20 @@ Tagline: **"Your next great ride starts here."**
 
 ## Color scheme
 
-| Role | Name | Hex |
-|---|---|---|
-| Primary accent | Orange | `#FF6B00` |
-| Accent dark (hover) | Orange Dark | `#D95A00` |
-| Accent light | Orange Light | `#FF8C33` |
-| Background | White | `#FFFFFF` |
-| Surface | Light grey | `#F7F7F7` |
-| Hero / dark sections | Near-black | `#1A1A1A` |
-| Dark mid | Charcoal | `#2D2D2D` |
-| Body text | Near-black | `#1A1A1A` |
-| Muted text | Medium grey | `#6B6B6B` |
-| Border | Light grey | `#E2E2E2` |
-| Route line on map | Orange | `#FF6B00` |
-| Google Maps button | Google Blue | `#4285F4` |
+| Role                 | Name         | Hex       |
+| -------------------- | ------------ | --------- |
+| Primary accent       | Orange       | `#FF6B00` |
+| Accent dark (hover)  | Orange Dark  | `#D95A00` |
+| Accent light         | Orange Light | `#FF8C33` |
+| Background           | White        | `#FFFFFF` |
+| Surface              | Light grey   | `#F7F7F7` |
+| Hero / dark sections | Near-black   | `#1A1A1A` |
+| Dark mid             | Charcoal     | `#2D2D2D` |
+| Body text            | Near-black   | `#1A1A1A` |
+| Muted text           | Medium grey  | `#6B6B6B` |
+| Border               | Light grey   | `#E2E2E2` |
+| Route line on map    | Orange       | `#FF6B00` |
+| Google Maps button   | Google Blue  | `#4285F4` |
 
 **Overall feel:** Dark hero section with a warm orange CTA, clean white content sections below. Bold, high-contrast, built for outdoor use.
 
@@ -64,14 +64,14 @@ Tagline: **"Your next great ride starts here."**
 **Primary font:** Inter (Google Fonts) — used for all body text, UI labels, buttons, and headings.
 Fallback stack: `-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
 
-| Scale | Size | Usage |
-|---|---|---|
-| sm | 14px (0.875rem) | Hints, labels, fine print |
-| base | 16px (1rem) | Body text, form inputs |
-| lg | 18px (1.125rem) | Section subtitles, card text |
-| xl | 20px (1.25rem) | Small headings |
-| 2xl | 24px (1.5rem) | Section headings |
-| 3xl | 32px (2rem) | Page headings |
+| Scale | Size            | Usage                        |
+| ----- | --------------- | ---------------------------- |
+| sm    | 14px (0.875rem) | Hints, labels, fine print    |
+| base  | 16px (1rem)     | Body text, form inputs       |
+| lg    | 18px (1.125rem) | Section subtitles, card text |
+| xl    | 20px (1.25rem)  | Small headings               |
+| 2xl   | 24px (1.5rem)   | Section headings             |
+| 3xl   | 32px (2rem)     | Page headings                |
 
 **Style:** Clean, modern sans-serif. No decorative or display fonts. Weight varies from 400 (body) to 700 (headings and CTAs). The overall typographic feel is minimal and functional — legibility first, especially on small screens.
 

@@ -1481,6 +1481,7 @@
 					link.href = poi.website;
 					link.target = "_blank";
 					link.rel = "noopener";
+					link.textContent = "Visit website";
 					link.title = "Visit website";
 					link.addEventListener("click", function (e) {
 						e.stopPropagation();

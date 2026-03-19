@@ -322,6 +322,7 @@ $has_api_key = ! empty( get_option( 'rideloop_google_maps_api_key', '' ) );
                 <!-- Route Summary — shown after a route is generated -->
                 <div id="route-summary" class="route-summary" hidden aria-live="polite">
                     <h2 class="route-summary__title">Route Summary</h2>
+                    <div id="route-filter-tags" class="route-filter-tags"></div>
                     <ul class="route-summary__stats">
                         <li class="route-stat">
                             <span class="route-stat__label">Total Distance</span>

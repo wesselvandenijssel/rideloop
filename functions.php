@@ -61,6 +61,20 @@ function rideloop_enqueue_assets() {
         true // load in footer
     );
 
+    // Load Google Maps Places on the front page for hero autocomplete
+    if (is_front_page()) {
+        $api_key = get_option('rideloop_google_maps_api_key', '');
+        if (! empty($api_key)) {
+            wp_enqueue_script(
+                'google-maps-api-hero',
+                'https://maps.googleapis.com/maps/api/js?key=' . esc_attr($api_key) . '&loading=async&libraries=places&callback=rideloopInitHero',
+                ['rideloop-main'],
+                null,
+                true
+            );
+        }
+    }
+
     // Only load the planner script + Google Maps on the planner page
     if (is_page_template('page-planner.php')) {
         $api_key = get_option('rideloop_google_maps_api_key', '');

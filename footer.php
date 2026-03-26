@@ -16,12 +16,12 @@
             <div class="site-footer__col">
                 <h3 class="site-footer__col-title"><?php esc_html_e( 'Navigate', 'rideloop' ); ?></h3>
                 <nav aria-label="<?php esc_attr_e( 'Footer Navigation', 'rideloop' ); ?>">
-                    <ul class="site-footer__nav">
-                        <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'rideloop' ); ?></a></li>
-                        <li><a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>"><?php esc_html_e( 'Route Planner', 'rideloop' ); ?></a></li>
-                        <li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>"><?php esc_html_e( 'About', 'rideloop' ); ?></a></li>
-                        <li><a href="<?php echo esc_url( rideloop_get_contact_url() ); ?>"><?php esc_html_e( 'Contact', 'rideloop' ); ?></a></li>
-                    </ul>
+                    <?php wp_nav_menu( [
+                        'theme_location' => 'footer',
+                        'container'      => false,
+                        'menu_class'     => 'site-footer__nav',
+                        'fallback_cb'    => false,
+                    ] ); ?>
                 </nav>
             </div>
 

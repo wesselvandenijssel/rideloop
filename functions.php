@@ -24,6 +24,7 @@ function rideloop_setup() {
     // Register primary navigation menu
     register_nav_menus([
         'primary' => __('Primary Menu', 'rideloop'),
+        'footer'  => __('Footer Menu', 'rideloop'),
     ]);
 }
 add_action('after_setup_theme', 'rideloop_setup');

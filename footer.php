@@ -20,7 +20,7 @@
                         <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'rideloop' ); ?></a></li>
                         <li><a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>"><?php esc_html_e( 'Route Planner', 'rideloop' ); ?></a></li>
                         <li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>"><?php esc_html_e( 'About', 'rideloop' ); ?></a></li>
-                        <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php esc_html_e( 'Contact', 'rideloop' ); ?></a></li>
+                        <li><a href="<?php echo esc_url( rideloop_get_contact_url() ); ?>"><?php esc_html_e( 'Contact', 'rideloop' ); ?></a></li>
                     </ul>
                 </nav>
             </div>

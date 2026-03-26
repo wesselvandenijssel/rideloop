@@ -196,7 +196,7 @@ msgstr "Genereer &amp; exporteer"
 
 #: front-page.php
 msgid "RideLoop builds your loop and displays it on an interactive map. Hit \"Open in Google Maps\" to ride — it works with Android Auto and Apple CarPlay."
-msgstr "RideLoop bouwt je lus en toont deze op een interactieve kaart. Tik op \"Openen in Google Maps\" om te rijden — werkt met Android Auto en Apple CarPlay."
+msgstr "RideLoop bouwt je ronde en toont deze op een interactieve kaart. Tik op \"Openen in Google Maps\" om te rijden — werkt met Android Auto en Apple CarPlay."
 
 #: front-page.php
 msgid "Generate your first loop in under a minute — no account, no downloads."

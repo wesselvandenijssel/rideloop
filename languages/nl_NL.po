@@ -160,7 +160,7 @@ msgstr "Kies de reisduur en wegvoorkeur — bochtige wegen, snelwegen of gemengd
 
 #: front-page.php
 msgid "Ride the Loop"
-msgstr "Rij de lus"
+msgstr "Rij de ronde"
 
 #: front-page.php
 msgid "Get a full round-trip route drawn on an interactive map, then export it straight to Google Maps with one tap."
@@ -200,7 +200,7 @@ msgstr "RideLoop bouwt je ronde en toont deze op een interactieve kaart. Tik op 
 
 #: front-page.php
 msgid "Generate your first loop in under a minute — no account, no downloads."
-msgstr "Genereer je eerste lus in minder dan een minuut — geen account, geen downloads."
+msgstr "Genereer je eerste ronde in minder dan een minuut — geen account, geen downloads."
 
 #: page-about.php
 msgid "About RideLoop"
@@ -228,7 +228,7 @@ msgstr "Hoe de routegeneratie werkt"
 
 #: page-about.php
 msgid "RideLoop uses the %s to calculate routes. When you select \"Twisties / Scenic,\" we bias the waypoints away from major highways and toward rural and secondary roads. When you choose \"Highways,\" we optimize for speed. The result is always a closed loop — you end exactly where you started."
-msgstr "RideLoop gebruikt de %s om routes te berekenen. Wanneer je \"Bochtig / Schilderachtig\" selecteert, sturen we de waypoints weg van grote snelwegen en richting landelijke secundaire wegen. Bij \"Snelwegen\" optimaliseren we op snelheid. Het resultaat is altijd een gesloten lus — je eindigt precies waar je begon."
+msgstr "RideLoop gebruikt de %s om routes te berekenen. Wanneer je \"Bochtig / Schilderachtig\" selecteert, sturen we de waypoints weg van grote snelwegen en richting landelijke secundaire wegen. Bij \"Snelwegen\" optimaliseren we op snelheid. Het resultaat is altijd een gesloten ronde — je eindigt precies waar je begon."
 
 #: page-about.php
 msgid "Once your route is generated, you can export it directly to Google Maps with all waypoints encoded in the URL — no account required, works on any device, compatible with Android Auto and CarPlay."
@@ -400,7 +400,7 @@ msgstr "Extra bochtig"
 
 #: page-planner.php
 msgid "Max turns, tight loops, winding paths"
-msgstr "Maximale bochten, strakke lussen, kronkelende paden"
+msgstr "Maximale bochten, kronkelende paden"
 
 #: page-planner.php
 msgid "Twisties / Scenic"
@@ -432,7 +432,7 @@ msgstr "Landschap / Terrein"
 
 #: page-planner.php
 msgid "Any"
-msgstr "Willekeurig"
+msgstr "Random"
 
 #: page-planner.php
 msgid "No terrain preference"
@@ -544,7 +544,7 @@ msgstr "Waypoints"
 
 #: page-planner.php
 msgid "Loop Waypoints"
-msgstr "Lus waypoints"
+msgstr "Loop Waypoints"
 
 #: page-planner.php
 msgid "Elevation Profile"
@@ -580,7 +580,7 @@ msgstr "Route delen"
 
 #: page-planner.php
 msgid "Start Over"
-msgstr "Opnieuw beginnen"
+msgstr "Opnieuw"
 
 #: page-planner.php
 msgid "Route map"

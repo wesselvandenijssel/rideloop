@@ -11,6 +11,12 @@
 // Theme Setup
 // -------------------------------------------------------------------------
 
+function rideloop_load_textdomain() {
+    load_theme_textdomain( 'rideloop', get_template_directory() . '/languages' );
+}
+add_action( 'after_setup_theme', 'rideloop_load_textdomain' );
+
+
 function rideloop_setup() {
     // Allow WordPress to manage the document title
     add_theme_support('title-tag');

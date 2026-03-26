@@ -1,0 +1,660 @@
+# Copyright (C) 2024 RideLoop
+# This file is distributed under the same license as the RideLoop theme.
+msgid ""
+msgstr ""
+"Project-Id-Version: RideLoop 1.0\n"
+"Report-Msgid-Bugs-To: rideloop@wesselvandenijssel.nl\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: RideLoop Theme\n"
+"X-Domain: rideloop\n"
+
+#. Theme Name of the theme
+msgid "RideLoop"
+msgstr ""
+
+#: header.php
+msgid "Site information"
+msgstr ""
+
+#: header.php
+msgid "Key features"
+msgstr ""
+
+#: header.php
+msgid "Free to use"
+msgstr ""
+
+#: header.php
+msgid "No account needed"
+msgstr ""
+
+#: header.php
+msgid "Round-trip in seconds"
+msgstr ""
+
+#: header.php
+msgid "Works with Google Maps"
+msgstr ""
+
+#: header.php
+msgid "Contact"
+msgstr ""
+
+#: header.php
+msgid "Home"
+msgstr ""
+
+#: header.php
+msgid "Primary Menu"
+msgstr ""
+
+#: header.php
+msgid "Plan a Ride"
+msgstr ""
+
+#: header.php
+msgid "Toggle menu"
+msgstr ""
+
+#: header.php
+msgid "Planner"
+msgstr ""
+
+#: header.php
+msgid "About"
+msgstr ""
+
+#: footer.php
+msgid "Plan the ride. Live the road."
+msgstr ""
+
+#: footer.php
+msgid "Generate scenic round-trip motorcycle routes in seconds. No account needed."
+msgstr ""
+
+#: footer.php
+msgid "Navigate"
+msgstr ""
+
+#: footer.php
+msgid "Footer Navigation"
+msgstr ""
+
+#: footer.php
+msgid "Route Planner"
+msgstr ""
+
+#: footer.php
+msgid "Ready to ride?"
+msgstr ""
+
+#: footer.php
+msgid "Build your perfect loop in under a minute."
+msgstr ""
+
+#: footer.php
+msgid "Open the Planner"
+msgstr ""
+
+#: footer.php
+msgid "Built for riders, by riders."
+msgstr ""
+
+#: footer.php
+msgid "Powered by Google Maps · Routes are suggestions only — always ride safely."
+msgstr ""
+
+#: front-page.php
+msgid "Motorcycle Route Planner"
+msgstr ""
+
+#: front-page.php
+msgid "Your next great ride"
+msgstr ""
+
+#: front-page.php
+msgid "starts here."
+msgstr ""
+
+#: front-page.php
+msgid "Enter a starting point, pick your style, and RideLoop generates a scenic round-trip route you can send straight to Google Maps."
+msgstr ""
+
+#: front-page.php
+msgid "Starting Location"
+msgstr ""
+
+#: front-page.php
+msgid "Enter your starting location..."
+msgstr ""
+
+#: front-page.php
+msgid "Generate Route"
+msgstr ""
+
+#: front-page.php
+msgid "No account needed. Free to use."
+msgstr ""
+
+#: front-page.php
+msgid "How RideLoop Works"
+msgstr ""
+
+#: front-page.php
+msgid "Set Your Start"
+msgstr ""
+
+#: front-page.php
+msgid "Type any address or use your current location. RideLoop auto-detects where you are to save time."
+msgstr ""
+
+#: front-page.php
+msgid "Pick Your Vibe"
+msgstr ""
+
+#: front-page.php
+msgid "Choose trip duration and road preference — twisties, highways, or mixed. Avoid tolls, ferries, or unpaved roads."
+msgstr ""
+
+#: front-page.php
+msgid "Ride the Loop"
+msgstr ""
+
+#: front-page.php
+msgid "Get a full round-trip route drawn on an interactive map, then export it straight to Google Maps with one tap."
+msgstr ""
+
+#: front-page.php
+msgid "How It Works"
+msgstr ""
+
+#: front-page.php
+msgid "Three steps to your next adventure."
+msgstr ""
+
+#: front-page.php
+msgid "Enter a starting point"
+msgstr ""
+
+#: front-page.php
+msgid "Type in an address, a town, or use your GPS location. RideLoop uses Google Places to autocomplete as you type."
+msgstr ""
+
+#: front-page.php
+msgid "Choose your preferences"
+msgstr ""
+
+#: front-page.php
+msgid "Set how long you want to ride, whether you want curvy backroads or smooth highways, and any roads to avoid."
+msgstr ""
+
+#: front-page.php
+msgid "Generate &amp; export"
+msgstr ""
+
+#: front-page.php
+msgid "RideLoop builds your loop and displays it on an interactive map. Hit \"Open in Google Maps\" to ride — it works with Android Auto and Apple CarPlay."
+msgstr ""
+
+#: front-page.php
+msgid "Generate your first loop in under a minute — no account, no downloads."
+msgstr ""
+
+#: page-about.php
+msgid "About RideLoop"
+msgstr ""
+
+#: page-about.php
+msgid "Why we built it, and what's ahead."
+msgstr ""
+
+#: page-about.php
+msgid "Built for riders, by riders"
+msgstr ""
+
+#: page-about.php
+msgid "RideLoop started with a simple frustration: planning a good motorcycle route takes forever. You open Google Maps, drop a few pins, realize the route goes through suburbs, redo it, and twenty minutes later you still haven't left the driveway."
+msgstr ""
+
+#: page-about.php
+msgid "We wanted a tool that understands what motorcyclists actually want — scenic roads, twisting curves, minimal stop-and-go — and generates a ready-to-ride round-trip loop in seconds. Enter a starting point, set a duration, and go."
+msgstr ""
+
+#: page-about.php
+msgid "How the route generation works"
+msgstr ""
+
+#: page-about.php
+msgid "RideLoop uses the %s to calculate routes. When you select \"Twisties / Scenic,\" we bias the waypoints away from major highways and toward rural and secondary roads. When you choose \"Highways,\" we optimize for speed. The result is always a closed loop — you end exactly where you started."
+msgstr ""
+
+#: page-about.php
+msgid "Once your route is generated, you can export it directly to Google Maps with all waypoints encoded in the URL — no account required, works on any device, compatible with Android Auto and CarPlay."
+msgstr ""
+
+#: page-about.php
+msgid "Privacy"
+msgstr ""
+
+#: page-about.php
+msgid "RideLoop runs entirely client-side. Your location is used only to center the map and pre-fill the starting address — it is never stored on our servers. All routing is handled directly between your browser and Google Maps."
+msgstr ""
+
+#: page-about.php
+msgid "Try the Planner"
+msgstr ""
+
+#: page-contact.php
+msgid "Get in touch"
+msgstr ""
+
+#: page-contact.php
+msgid "Questions, feedback, or just want to share your favourite route? Reach out — we'd love to hear from you."
+msgstr ""
+
+#: page-contact.php
+msgid "Email us"
+msgstr ""
+
+#: page-contact.php
+msgid "Send us a message and we'll get back to you as soon as possible."
+msgstr ""
+
+#: page-contact.php
+msgid "What can we help with?"
+msgstr ""
+
+#: page-contact.php
+msgid "Bug reports or route issues"
+msgstr ""
+
+#: page-contact.php
+msgid "Feature suggestions"
+msgstr ""
+
+#: page-contact.php
+msgid "Feedback on your experience"
+msgstr ""
+
+#: page-contact.php
+msgid "General questions about RideLoop"
+msgstr ""
+
+#: 404.php
+msgid "Wrong turn."
+msgstr ""
+
+#: 404.php
+msgid "Looks like this road doesn't exist. The page you're looking for has moved, been removed, or never existed."
+msgstr ""
+
+#: 404.php
+msgid "Go Home"
+msgstr ""
+
+#: page-planner.php
+msgid "Setup required:"
+msgstr ""
+
+#: page-planner.php
+msgid "No Google Maps API key is configured."
+msgstr ""
+
+#: page-planner.php
+msgid "Go to RideLoop Settings"
+msgstr ""
+
+#: page-planner.php
+msgid "Route options"
+msgstr ""
+
+#: page-planner.php
+msgid "Address, city, or landmark..."
+msgstr ""
+
+#: page-planner.php
+msgid "Use my current location"
+msgstr ""
+
+#: page-planner.php
+msgid "End Point"
+msgstr ""
+
+#: page-planner.php
+msgid "(optional)"
+msgstr ""
+
+#: page-planner.php
+msgid "Leave blank for a round-trip loop..."
+msgstr ""
+
+#: page-planner.php
+msgid "Form steps"
+msgstr ""
+
+#: page-planner.php
+msgid "Distance"
+msgstr ""
+
+#: page-planner.php
+msgid "Roads"
+msgstr ""
+
+#: page-planner.php
+msgid "Details"
+msgstr ""
+
+#: page-planner.php
+msgid "Plan by"
+msgstr ""
+
+#: page-planner.php
+msgid "Time"
+msgstr ""
+
+#: page-planner.php
+msgid "Approximate Trip Duration"
+msgstr ""
+
+#: page-planner.php
+msgid "~1 hour"
+msgstr ""
+
+#: page-planner.php
+msgid "~2 hours"
+msgstr ""
+
+#: page-planner.php
+msgid "~3 hours"
+msgstr ""
+
+#: page-planner.php
+msgid "Half day (~4–5 hours)"
+msgstr ""
+
+#: page-planner.php
+msgid "Full day (~7–8 hours)"
+msgstr ""
+
+#: page-planner.php
+msgid "Trip Distance"
+msgstr ""
+
+#: page-planner.php
+msgid "Enter the total round-trip distance (20–1200 km)."
+msgstr ""
+
+#: page-planner.php
+msgid "Next"
+msgstr ""
+
+#: page-planner.php
+msgid "Road Preference"
+msgstr ""
+
+#: page-planner.php
+msgid "Extra Curvy"
+msgstr ""
+
+#: page-planner.php
+msgid "Max turns, tight loops, winding paths"
+msgstr ""
+
+#: page-planner.php
+msgid "Twisties / Scenic"
+msgstr ""
+
+#: page-planner.php
+msgid "Backroads with character"
+msgstr ""
+
+#: page-planner.php
+msgid "Mixed"
+msgstr ""
+
+#: page-planner.php
+msgid "Balance of fast and scenic"
+msgstr ""
+
+#: page-planner.php
+msgid "Highways"
+msgstr ""
+
+#: page-planner.php
+msgid "Fast, direct roads"
+msgstr ""
+
+#: page-planner.php
+msgid "Scenery / Terrain"
+msgstr ""
+
+#: page-planner.php
+msgid "Any"
+msgstr ""
+
+#: page-planner.php
+msgid "No terrain preference"
+msgstr ""
+
+#: page-planner.php
+msgid "Forest &amp; Woodland"
+msgstr ""
+
+#: page-planner.php
+msgid "Routes through wooded areas"
+msgstr ""
+
+#: page-planner.php
+msgid "Lakes &amp; Rivers"
+msgstr ""
+
+#: page-planner.php
+msgid "Follow waterways and coastlines"
+msgstr ""
+
+#: page-planner.php
+msgid "Heathland (Heide)"
+msgstr ""
+
+#: page-planner.php
+msgid "Open heather and moorland"
+msgstr ""
+
+#: page-planner.php
+msgid "Offroad &amp; Gravel"
+msgstr ""
+
+#: page-planner.php
+msgid "Includes unpaved tracks and gravel paths"
+msgstr ""
+
+#: page-planner.php
+msgid "Back"
+msgstr ""
+
+#: page-planner.php
+msgid "Head towards"
+msgstr ""
+
+#: page-planner.php
+msgid "N"
+msgstr ""
+
+#: page-planner.php
+msgid "E"
+msgstr ""
+
+#: page-planner.php
+msgid "S"
+msgstr ""
+
+#: page-planner.php
+msgid "W"
+msgstr ""
+
+#: page-planner.php
+msgid "Avoid"
+msgstr ""
+
+#: page-planner.php
+msgid "Highways / Motorways"
+msgstr ""
+
+#: page-planner.php
+msgid "Tolls"
+msgstr ""
+
+#: page-planner.php
+msgid "Ferries"
+msgstr ""
+
+#: page-planner.php
+msgid "Unpaved Roads"
+msgstr ""
+
+#: page-planner.php
+msgid "Generate a route with random settings"
+msgstr ""
+
+#: page-planner.php
+msgid "Random route"
+msgstr ""
+
+#: page-planner.php
+msgid "Random"
+msgstr ""
+
+#: page-planner.php
+msgid "Route Summary"
+msgstr ""
+
+#: page-planner.php
+msgid "Total Distance"
+msgstr ""
+
+#: page-planner.php
+msgid "Estimated Time"
+msgstr ""
+
+#: page-planner.php
+msgid "Waypoints"
+msgstr ""
+
+#: page-planner.php
+msgid "Loop Waypoints"
+msgstr ""
+
+#: page-planner.php
+msgid "Elevation Profile"
+msgstr ""
+
+#: page-planner.php
+msgid "Low"
+msgstr ""
+
+#: page-planner.php
+msgid "High"
+msgstr ""
+
+#: page-planner.php
+msgid "Points of Interest"
+msgstr ""
+
+#: page-planner.php
+msgid "Open this route in Google Maps (opens new tab)"
+msgstr ""
+
+#: page-planner.php
+msgid "Open in Google Maps"
+msgstr ""
+
+#: page-planner.php
+msgid "Share this route"
+msgstr ""
+
+#: page-planner.php
+msgid "Share Route"
+msgstr ""
+
+#: page-planner.php
+msgid "Start Over"
+msgstr ""
+
+#: page-planner.php
+msgid "Route map"
+msgstr ""
+
+#: page-planner.php
+msgid "Interactive route map"
+msgstr ""
+
+#: page-planner.php
+msgid "Your route will appear here"
+msgstr ""
+
+#: page-planner.php
+msgid "Map unavailable — API key not configured"
+msgstr ""
+
+#: functions.php
+msgid "RideLoop Settings"
+msgstr ""
+
+#: functions.php
+msgid "Google Maps Configuration"
+msgstr ""
+
+#: functions.php
+msgid "Google Maps API Key"
+msgstr ""
+
+#: functions.php
+msgid "Default Map Center (Latitude)"
+msgstr ""
+
+#: functions.php
+msgid "Default Map Center (Longitude)"
+msgstr ""
+
+#: functions.php
+msgid "Enter your Google Maps API key and optional default map location. The API key must have Maps JavaScript API and Places API enabled."
+msgstr ""
+
+#: functions.php
+msgid "Required for map display, route planning, and location autocomplete."
+msgstr ""
+
+#: functions.php
+msgid "Fallback latitude if geolocation is not available (default: 52.0907 — Utrecht)."
+msgstr ""
+
+#: functions.php
+msgid "Fallback longitude if geolocation is not available (default: 5.1214 — Utrecht)."
+msgstr ""
+
+#: functions.php
+msgid "Settings saved successfully."
+msgstr ""
+
+#: functions.php
+msgid "Quick Setup Guide"
+msgstr ""
+
+#: functions.php
+msgid "Go to Google Cloud Console and create or select a project."
+msgstr ""
+
+#: functions.php
+msgid "Enable: Maps JavaScript API, Places API, and Directions API."
+msgstr ""
+
+#: functions.php
+msgid "Create an API key and restrict it to your domain for security."
+msgstr ""
+
+#: functions.php
+msgid "Paste the key above and save."
+msgstr ""

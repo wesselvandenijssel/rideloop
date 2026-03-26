@@ -12,8 +12,8 @@ get_header();
 
     <div class="contact-hero">
         <div class="container">
-            <h1 class="contact-hero__title">Get in touch</h1>
-            <p class="contact-hero__subtitle">Questions, feedback, or just want to share your favourite route? Reach out — we'd love to hear from you.</p>
+            <h1 class="contact-hero__title"><?php esc_html_e( 'Get in touch', 'rideloop' ); ?></h1>
+            <p class="contact-hero__subtitle"><?php esc_html_e( "Questions, feedback, or just want to share your favourite route? Reach out — we'd love to hear from you.", 'rideloop' ); ?></p>
         </div>
     </div>
 
@@ -27,8 +27,8 @@ get_header();
                         <polyline points="22,6 12,13 2,6"/>
                     </svg>
                 </div>
-                <h2 class="contact-card__title">Email us</h2>
-                <p class="contact-card__desc">Send us a message and we'll get back to you as soon as possible.</p>
+                <h2 class="contact-card__title"><?php esc_html_e( 'Email us', 'rideloop' ); ?></h2>
+                <p class="contact-card__desc"><?php esc_html_e( "Send us a message and we'll get back to you as soon as possible.", 'rideloop' ); ?></p>
                 <a href="mailto:rideloop@wesselvandenijssel.nl" class="contact-card__email">
                     rideloop@wesselvandenijssel.nl
                 </a>
@@ -42,12 +42,12 @@ get_header();
                         <line x1="12" y1="16" x2="12.01" y2="16"/>
                     </svg>
                 </div>
-                <h2 class="contact-card__title">What can we help with?</h2>
+                <h2 class="contact-card__title"><?php esc_html_e( 'What can we help with?', 'rideloop' ); ?></h2>
                 <ul class="contact-card__list">
-                    <li>Bug reports or route issues</li>
-                    <li>Feature suggestions</li>
-                    <li>Feedback on your experience</li>
-                    <li>General questions about RideLoop</li>
+                    <li><?php esc_html_e( 'Bug reports or route issues', 'rideloop' ); ?></li>
+                    <li><?php esc_html_e( 'Feature suggestions', 'rideloop' ); ?></li>
+                    <li><?php esc_html_e( 'Feedback on your experience', 'rideloop' ); ?></li>
+                    <li><?php esc_html_e( 'General questions about RideLoop', 'rideloop' ); ?></li>
                 </ul>
             </div>
 

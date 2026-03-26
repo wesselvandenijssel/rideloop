@@ -386,6 +386,63 @@ ol {
 	padding: 8px 18px;
 }
 
+/* Language switcher — desktop */
+.lang-switcher {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	flex-shrink: 0;
+}
+
+.lang-switcher li {
+	display: flex;
+	align-items: center;
+}
+
+.lang-switcher li a,
+.lang-switcher li span {
+	display: block;
+	padding: 4px 8px;
+	font-size: var(--font-size-sm);
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--color-text-muted);
+	border-radius: var(--radius-sm);
+	text-decoration: none;
+	transition: color var(--transition), background var(--transition);
+}
+
+.lang-switcher li a:hover {
+	color: #fff;
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.lang-switcher li.current-lang a,
+.lang-switcher li.current-lang span {
+	color: #fff;
+	font-weight: 600;
+}
+
+.lang-switcher li:not(:last-child)::after {
+	content: '/';
+	color: var(--color-text-muted);
+	font-size: var(--font-size-sm);
+	opacity: 0.4;
+	padding-left: 2px;
+}
+
+/* Language switcher — mobile */
+.lang-switcher--mobile {
+	justify-content: center;
+	padding: 8px 0 4px;
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	margin-top: 4px;
+}
+
 /* Mobile toggle */
 .site-header__toggle {
 	display: none;
@@ -1807,7 +1864,8 @@ gmp-place-autocomplete::part(input) {
 	}
 
 	.site-nav,
-	.site-header__cta {
+	.site-header__cta,
+	.lang-switcher:not(.lang-switcher--mobile) {
 		display: none;
 	}
 

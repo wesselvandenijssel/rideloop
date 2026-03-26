@@ -58,6 +58,18 @@
                 ?>
             </nav>
 
+            <!-- Language Switcher -->
+            <?php if ( function_exists( 'pll_the_languages' ) ) : ?>
+                <ul class="lang-switcher" aria-label="<?php esc_attr_e( 'Language switcher', 'rideloop' ); ?>">
+                    <?php pll_the_languages( [
+                        'show_flags'       => 0,
+                        'show_names'       => 1,
+                        'display_names_as' => 'slug',
+                        'hide_current'     => 0,
+                    ] ); ?>
+                </ul>
+            <?php endif; ?>
+
             <!-- CTA Button -->
             <a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>" class="btn btn--primary site-header__cta">
                 <?php esc_html_e( 'Plan a Ride', 'rideloop' ); ?>
@@ -85,6 +97,16 @@
             'fallback_cb'    => 'rideloop_fallback_menu',
         ] );
         ?>
+        <?php if ( function_exists( 'pll_the_languages' ) ) : ?>
+            <ul class="lang-switcher lang-switcher--mobile">
+                <?php pll_the_languages( [
+                    'show_flags'       => 0,
+                    'show_names'       => 1,
+                    'display_names_as' => 'slug',
+                    'hide_current'     => 0,
+                ] ); ?>
+            </ul>
+        <?php endif; ?>
         <a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>" class="btn btn--primary btn--full"><?php esc_html_e( 'Plan a Ride', 'rideloop' ); ?></a>
     </div>
 

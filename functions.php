@@ -11,12 +11,6 @@
 // Theme Setup
 // -------------------------------------------------------------------------
 
-function rideloop_load_textdomain() {
-    load_theme_textdomain( 'rideloop', get_template_directory() . '/languages' );
-}
-add_action( 'after_setup_theme', 'rideloop_load_textdomain' );
-
-
 function rideloop_setup() {
     // Allow WordPress to manage the document title
     add_theme_support('title-tag');
@@ -275,9 +269,12 @@ function rideloop_settings_page() {
 // -------------------------------------------------------------------------
 
 function rideloop_get_planner_url() {
-    $planner = get_page_by_path('planner');
-    if ($planner) {
-        return get_permalink($planner->ID);
+    $slug = (function_exists('pll_current_language') && pll_current_language() === 'nl')
+        ? 'planner'
+        : 'plan';
+
+    if (!empty($slug)) {
+        return home_url("/{$slug}/");
     }
-    return home_url('/planner/');
+    return home_url('/');
 }

@@ -24,6 +24,7 @@ function rideloop_setup() {
     // Register primary navigation menu
     register_nav_menus([
         'primary' => __('Primary Menu', 'rideloop'),
+        'footer'  => __('Footer Menu', 'rideloop'),
     ]);
 }
 add_action('after_setup_theme', 'rideloop_setup');
@@ -227,13 +228,28 @@ function rideloop_settings_page() {
 
 
 // -------------------------------------------------------------------------
-// Helper: Get Planner Page URL
+// Helpers: Language-aware page URLs
 // -------------------------------------------------------------------------
 
 function rideloop_get_planner_url() {
-    $planner = get_page_by_path('planner');
-    if ($planner) {
-        return get_permalink($planner->ID);
+    $slug = (function_exists('pll_current_language') && pll_current_language() === 'nl')
+        ? 'planner'
+        : 'plan';
+
+    if (!empty($slug)) {
+        return home_url("/{$slug}/");
     }
-    return home_url('/planner/');
+    return home_url('/');
+}
+
+function rideloop_get_contact_url() {
+    $slug = ( function_exists( 'pll_current_language' ) && pll_current_language() === 'nl' )
+        ? 'contact-nl'
+        : 'contact';
+
+    $page = get_page_by_path( $slug );
+    if ( $page ) {
+        return get_permalink( $page->ID );
+    }
+    return home_url( "/{$slug}/" );
 }

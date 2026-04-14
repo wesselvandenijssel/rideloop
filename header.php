@@ -10,29 +10,29 @@
 <?php wp_body_open(); ?>
 
 <!-- Topbar -->
-<div class="site-topbar" role="note" aria-label="Site information">
+<div class="site-topbar" role="note" aria-label="<?php esc_attr_e( 'Site information', 'rideloop' ); ?>">
     <div class="container">
-        <ul class="site-topbar__usps" aria-label="Key features">
+        <ul class="site-topbar__usps" aria-label="<?php esc_attr_e( 'Key features', 'rideloop' ); ?>">
             <li>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                Free to use
+                <?php esc_html_e( 'Free to use', 'rideloop' ); ?>
             </li>
             <li>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                No account needed
+                <?php esc_html_e( 'No account needed', 'rideloop' ); ?>
             </li>
             <li>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                Round-trip in seconds
+                <?php esc_html_e( 'Round-trip in seconds', 'rideloop' ); ?>
             </li>
             <li>
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                Works with Google Maps
+                <?php esc_html_e( 'Works with Google Maps', 'rideloop' ); ?>
             </li>
         </ul>
-        <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="site-topbar__contact">
+        <a href="<?php echo esc_url( rideloop_get_contact_url() ); ?>" class="site-topbar__contact">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            Contact
+            <?php esc_html_e( 'Contact', 'rideloop' ); ?>
         </a>
     </div>
 </div>
@@ -42,7 +42,7 @@
         <div class="site-header__inner">
 
             <!-- Logo / Site Identity -->
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-header__logo" rel="home" aria-label="<?php bloginfo( 'name' ); ?> — Home">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-header__logo" rel="home" aria-label="<?php bloginfo( 'name' ); ?> — <?php esc_attr_e( 'Home', 'rideloop' ); ?>">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/logo.svg' ); ?>" alt="<?php bloginfo( 'name' ); ?>" width="140" height="36">
             </a>
 
@@ -58,13 +58,25 @@
                 ?>
             </nav>
 
+            <!-- Language Switcher -->
+            <?php if ( function_exists( 'pll_the_languages' ) ) : ?>
+                <ul class="lang-switcher" aria-label="<?php esc_attr_e( 'Language switcher', 'rideloop' ); ?>">
+                    <?php pll_the_languages( [
+                        'show_flags'       => 0,
+                        'show_names'       => 1,
+                        'display_names_as' => 'slug',
+                        'hide_current'     => 0,
+                    ] ); ?>
+                </ul>
+            <?php endif; ?>
+
             <!-- CTA Button -->
             <a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>" class="btn btn--primary site-header__cta">
-                Plan a Ride
+                <?php esc_html_e( 'Plan a Ride', 'rideloop' ); ?>
             </a>
 
             <!-- Mobile Menu Toggle -->
-            <button class="site-header__toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav-mobile">
+            <button class="site-header__toggle" aria-label="<?php esc_attr_e( 'Toggle menu', 'rideloop' ); ?>" aria-expanded="false" aria-controls="site-nav-mobile">
                 <span class="hamburger">
                     <span></span>
                     <span></span>
@@ -85,7 +97,17 @@
             'fallback_cb'    => 'rideloop_fallback_menu',
         ] );
         ?>
-        <a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>" class="btn btn--primary btn--full">Plan a Ride</a>
+        <?php if ( function_exists( 'pll_the_languages' ) ) : ?>
+            <ul class="lang-switcher lang-switcher--mobile">
+                <?php pll_the_languages( [
+                    'show_flags'       => 0,
+                    'show_names'       => 1,
+                    'display_names_as' => 'slug',
+                    'hide_current'     => 0,
+                ] ); ?>
+            </ul>
+        <?php endif; ?>
+        <a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>" class="btn btn--primary btn--full"><?php esc_html_e( 'Plan a Ride', 'rideloop' ); ?></a>
     </div>
 
 </header><!-- .site-header -->
@@ -97,9 +119,9 @@
  */
 function rideloop_fallback_menu() {
     echo '<ul class="site-nav__menu">';
-    echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">Home</a></li>';
-    echo '<li><a href="' . esc_url( home_url( '/planner/' ) ) . '">Planner</a></li>';
-    echo '<li><a href="' . esc_url( home_url( '/about/' ) ) . '">About</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Home', 'rideloop' ) . '</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/planner/' ) ) . '">' . esc_html__( 'Planner', 'rideloop' ) . '</a></li>';
+    echo '<li><a href="' . esc_url( home_url( '/about/' ) ) . '">' . esc_html__( 'About', 'rideloop' ) . '</a></li>';
     echo '</ul>';
 }
 ?>

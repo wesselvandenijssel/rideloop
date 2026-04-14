@@ -20,38 +20,37 @@ get_header();
         <div class="container">
             <div class="hero__content">
 
-                <div class="hero__badge">Motorcycle Route Planner</div>
+                <div class="hero__badge"><?php esc_html_e( 'Motorcycle Route Planner', 'rideloop' ); ?></div>
 
                 <h1 id="hero-heading" class="hero__title">
-                    Your next great ride <br>
-                    <span class="text-accent">starts here.</span>
+                    <?php esc_html_e( 'Your next great ride', 'rideloop' ); ?> <br>
+                    <span class="text-accent"><?php esc_html_e( 'starts here.', 'rideloop' ); ?></span>
                 </h1>
 
                 <p class="hero__subtitle">
-                    Enter a starting point, pick your style, and RideLoop generates
-                    a scenic round-trip route you can send straight to Google Maps.
+                    <?php esc_html_e( 'Enter a starting point, pick your style, and RideLoop generates a scenic round-trip route you can send straight to Google Maps.', 'rideloop' ); ?>
                 </p>
 
                 <!-- Quick-start form — redirects to full planner page -->
                 <form class="hero__form" id="hero-quick-form" action="<?php echo esc_url( rideloop_get_planner_url() ); ?>" method="get">
                     <div class="hero__form-group">
-                        <label for="hero-location" class="sr-only">Starting Location</label>
+                        <label for="hero-location" class="sr-only"><?php esc_html_e( 'Starting Location', 'rideloop' ); ?></label>
                         <input
                             type="text"
                             id="hero-location"
                             name="start_location"
                             class="hero__input"
-                            placeholder="Enter your starting location..."
+                            placeholder="<?php esc_attr_e( 'Enter your starting location...', 'rideloop' ); ?>"
                             autocomplete="off"
                         >
                         <button type="submit" class="btn btn--primary hero__form-btn">
-                            Generate Route
+                            <?php esc_html_e( 'Generate Route', 'rideloop' ); ?>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path d="M5 12h14M12 5l7 7-7 7"/>
                             </svg>
                         </button>
                     </div>
-                    <p class="hero__form-hint">No account needed. Free to use.</p>
+                    <p class="hero__form-hint"><?php esc_html_e( 'No account needed. Free to use.', 'rideloop' ); ?></p>
                 </form>
 
             </div><!-- .hero__content -->
@@ -65,7 +64,7 @@ get_header();
          ================================================================ -->
     <section class="features" aria-labelledby="features-heading">
         <div class="container">
-            <h2 id="features-heading" class="sr-only">How RideLoop Works</h2>
+            <h2 id="features-heading" class="sr-only"><?php esc_html_e( 'How RideLoop Works', 'rideloop' ); ?></h2>
             <div class="features__grid">
 
                 <div class="feature-card">
@@ -75,10 +74,9 @@ get_header();
                             <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
                         </svg>
                     </div>
-                    <h3 class="feature-card__title">Set Your Start</h3>
+                    <h3 class="feature-card__title"><?php esc_html_e( 'Set Your Start', 'rideloop' ); ?></h3>
                     <p class="feature-card__desc">
-                        Type any address or use your current location. RideLoop auto-detects
-                        where you are to save time.
+                        <?php esc_html_e( 'Type any address or use your current location. RideLoop auto-detects where you are to save time.', 'rideloop' ); ?>
                     </p>
                 </div>
 
@@ -88,10 +86,9 @@ get_header();
                             <path d="M3 11l19-9-9 19-2-8-8-2z"/>
                         </svg>
                     </div>
-                    <h3 class="feature-card__title">Pick Your Vibe</h3>
+                    <h3 class="feature-card__title"><?php esc_html_e( 'Pick Your Vibe', 'rideloop' ); ?></h3>
                     <p class="feature-card__desc">
-                        Choose trip duration and road preference — twisties, highways, or mixed.
-                        Avoid tolls, ferries, or unpaved roads.
+                        <?php esc_html_e( 'Choose trip duration and road preference — twisties, highways, or mixed. Avoid tolls, ferries, or unpaved roads.', 'rideloop' ); ?>
                     </p>
                 </div>
 
@@ -102,10 +99,9 @@ get_header();
                             <circle cx="12" cy="10" r="3"/>
                         </svg>
                     </div>
-                    <h3 class="feature-card__title">Ride the Loop</h3>
+                    <h3 class="feature-card__title"><?php esc_html_e( 'Ride the Loop', 'rideloop' ); ?></h3>
                     <p class="feature-card__desc">
-                        Get a full round-trip route drawn on an interactive map, then export
-                        it straight to Google Maps with one tap.
+                        <?php esc_html_e( 'Get a full round-trip route drawn on an interactive map, then export it straight to Google Maps with one tap.', 'rideloop' ); ?>
                     </p>
                 </div>
 
@@ -121,30 +117,30 @@ get_header();
         <div class="container">
 
             <header class="section-header">
-                <h2 id="hiw-heading" class="section-header__title">How It Works</h2>
-                <p class="section-header__subtitle">Three steps to your next adventure.</p>
+                <h2 id="hiw-heading" class="section-header__title"><?php esc_html_e( 'How It Works', 'rideloop' ); ?></h2>
+                <p class="section-header__subtitle"><?php esc_html_e( 'Three steps to your next adventure.', 'rideloop' ); ?></p>
             </header>
 
             <ol class="steps">
                 <li class="step">
                     <div class="step__number" aria-hidden="true">01</div>
                     <div class="step__content">
-                        <h3 class="step__title">Enter a starting point</h3>
-                        <p class="step__desc">Type in an address, a town, or use your GPS location. RideLoop uses Google Places to autocomplete as you type.</p>
+                        <h3 class="step__title"><?php esc_html_e( 'Enter a starting point', 'rideloop' ); ?></h3>
+                        <p class="step__desc"><?php esc_html_e( 'Type in an address, a town, or use your GPS location. RideLoop uses Google Places to autocomplete as you type.', 'rideloop' ); ?></p>
                     </div>
                 </li>
                 <li class="step">
                     <div class="step__number" aria-hidden="true">02</div>
                     <div class="step__content">
-                        <h3 class="step__title">Choose your preferences</h3>
-                        <p class="step__desc">Set how long you want to ride, whether you want curvy backroads or smooth highways, and any roads to avoid.</p>
+                        <h3 class="step__title"><?php esc_html_e( 'Choose your preferences', 'rideloop' ); ?></h3>
+                        <p class="step__desc"><?php esc_html_e( 'Set how long you want to ride, whether you want curvy backroads or smooth highways, and any roads to avoid.', 'rideloop' ); ?></p>
                     </div>
                 </li>
                 <li class="step">
                     <div class="step__number" aria-hidden="true">03</div>
                     <div class="step__content">
-                        <h3 class="step__title">Generate &amp; export</h3>
-                        <p class="step__desc">RideLoop builds your loop and displays it on an interactive map. Hit "Open in Google Maps" to ride — it works with Android Auto and Apple CarPlay.</p>
+                        <h3 class="step__title"><?php esc_html_e( 'Generate &amp; export', 'rideloop' ); ?></h3>
+                        <p class="step__desc"><?php esc_html_e( 'RideLoop builds your loop and displays it on an interactive map. Hit "Open in Google Maps" to ride — it works with Android Auto and Apple CarPlay.', 'rideloop' ); ?></p>
                     </div>
                 </li>
             </ol>
@@ -158,9 +154,9 @@ get_header();
          ================================================================ -->
     <section class="cta-banner" aria-labelledby="cta-heading">
         <div class="container">
-            <h2 id="cta-heading" class="cta-banner__title">Ready to ride?</h2>
-            <p class="cta-banner__subtitle">Generate your first loop in under a minute — no account, no downloads.</p>
-            <a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>" class="btn btn--primary btn--lg">Open the Planner</a>
+            <h2 id="cta-heading" class="cta-banner__title"><?php esc_html_e( 'Ready to ride?', 'rideloop' ); ?></h2>
+            <p class="cta-banner__subtitle"><?php esc_html_e( 'Generate your first loop in under a minute — no account, no downloads.', 'rideloop' ); ?></p>
+            <a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>" class="btn btn--primary btn--lg"><?php esc_html_e( 'Open the Planner', 'rideloop' ); ?></a>
         </div>
     </section>
 

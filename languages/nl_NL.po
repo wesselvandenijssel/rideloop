@@ -1,0 +1,624 @@
+# Dutch translation for the RideLoop theme.
+# Copyright (C) 2024 RideLoop
+msgid ""
+msgstr ""
+"Project-Id-Version: RideLoop 1.0\n"
+"Report-Msgid-Bugs-To: rideloop@wesselvandenijssel.nl\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: RideLoop Theme\n"
+"X-Domain: rideloop\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: header.php
+msgid "Site information"
+msgstr "Site-informatie"
+
+#: header.php
+msgid "Key features"
+msgstr "Kernfuncties"
+
+#: header.php
+msgid "Free to use"
+msgstr "Gratis te gebruiken"
+
+#: header.php
+msgid "No account needed"
+msgstr "Geen account nodig"
+
+#: header.php
+msgid "Round-trip in seconds"
+msgstr "Rondrit in seconden"
+
+#: header.php
+msgid "Works with Google Maps"
+msgstr "Werkt met Google Maps"
+
+#: header.php
+msgid "Contact"
+msgstr "Contact"
+
+#: header.php
+msgid "Home"
+msgstr "Home"
+
+#: header.php
+msgid "Primary Menu"
+msgstr "Hoofdmenu"
+
+#: header.php
+msgid "Plan a Ride"
+msgstr "Plan een rit"
+
+#: header.php
+msgid "Toggle menu"
+msgstr "Menu openen/sluiten"
+
+#: header.php
+msgid "Planner"
+msgstr "Planner"
+
+#: header.php
+msgid "About"
+msgstr "Over ons"
+
+#: footer.php
+msgid "Plan the ride. Live the road."
+msgstr "Plan de rit. Beleef de weg."
+
+#: footer.php
+msgid "Generate scenic round-trip motorcycle routes in seconds. No account needed."
+msgstr "Genereer in seconden schilderachtige motorroutes. Geen account nodig."
+
+#: footer.php
+msgid "Navigate"
+msgstr "Navigeer"
+
+#: footer.php
+msgid "Footer Navigation"
+msgstr "Voettekstnavigatie"
+
+#: footer.php
+msgid "Route Planner"
+msgstr "Routeplanner"
+
+#: footer.php
+msgid "Ready to ride?"
+msgstr "Klaar om te rijden?"
+
+#: footer.php
+msgid "Build your perfect loop in under a minute."
+msgstr "Bouw je perfecte lus in minder dan een minuut."
+
+#: footer.php
+msgid "Open the Planner"
+msgstr "Open de planner"
+
+#: footer.php
+msgid "Built for riders, by riders."
+msgstr "Gebouwd voor rijders, door rijders."
+
+#: footer.php
+msgid "Map data &copy; %s contributors &middot; Routes are suggestions only &mdash; always ride safely."
+msgstr "Kaartgegevens &copy; %s bijdragers &middot; Routes zijn suggesties — rij altijd veilig."
+
+#: front-page.php
+msgid "Motorcycle Route Planner"
+msgstr "Motorroute planner"
+
+#: front-page.php
+msgid "Your next great ride"
+msgstr "Your next great ride"
+
+#: front-page.php
+msgid "starts here."
+msgstr "starts here."
+
+#: front-page.php
+msgid "Enter a starting point, pick your style, and RideLoop generates a scenic round-trip route you can send straight to Google Maps."
+msgstr "Voer een startpunt in, kies je stijl en RideLoop genereert een schilderachtige rondrit die je direct naar Google Maps kunt sturen."
+
+#: front-page.php
+msgid "Starting Location"
+msgstr "Startlocatie"
+
+#: front-page.php
+msgid "Enter your starting location..."
+msgstr "Voer je startlocatie in..."
+
+#: front-page.php
+msgid "Generate Route"
+msgstr "Genereer route"
+
+#: front-page.php
+msgid "No account needed. Free to use."
+msgstr "Geen account nodig. Gratis te gebruiken."
+
+#: front-page.php
+msgid "How RideLoop Works"
+msgstr "Hoe RideLoop werkt"
+
+#: front-page.php
+msgid "Set Your Start"
+msgstr "Stel je start in"
+
+#: front-page.php
+msgid "Type any address or use your current location. RideLoop auto-detects where you are to save time."
+msgstr "Typ een adres of gebruik je huidige locatie. RideLoop detecteert automatisch waar je bent om tijd te besparen."
+
+#: front-page.php
+msgid "Pick Your Vibe"
+msgstr "Kies je stijl"
+
+#: front-page.php
+msgid "Choose trip duration and road preference — twisties, highways, or mixed. Avoid tolls, ferries, or unpaved roads."
+msgstr "Kies de reisduur en wegvoorkeur — bochtige wegen, snelwegen of gemengd. Vermijd tol, veren of onverharde wegen."
+
+#: front-page.php
+msgid "Ride the Loop"
+msgstr "Rij de ronde"
+
+#: front-page.php
+msgid "Get a full round-trip route drawn on an interactive map, then export it straight to Google Maps with one tap."
+msgstr "Krijg een volledige rondrit op een interactieve kaart en exporteer hem met één tik naar Google Maps."
+
+#: front-page.php
+msgid "How It Works"
+msgstr "Hoe het werkt"
+
+#: front-page.php
+msgid "Three steps to your next adventure."
+msgstr "Drie stappen naar je volgende avontuur."
+
+#: front-page.php
+msgid "Enter a starting point"
+msgstr "Voer een startpunt in"
+
+#: front-page.php
+msgid "Type in an address, a town, or use your GPS location. RideLoop uses Google Places to autocomplete as you type."
+msgstr "Typ een adres, een plaatsnaam of gebruik je GPS-locatie. RideLoop gebruikt Google Places voor automatisch aanvullen terwijl je typt."
+
+#: front-page.php
+msgid "Choose your preferences"
+msgstr "Kies je voorkeuren"
+
+#: front-page.php
+msgid "Set how long you want to ride, whether you want curvy backroads or smooth highways, and any roads to avoid."
+msgstr "Stel in hoe lang je wilt rijden, of je bochtige achterwegen of vlotte snelwegen wilt, en welke wegen je wilt vermijden."
+
+#: front-page.php
+msgid "Generate &amp; export"
+msgstr "Genereer &amp; exporteer"
+
+#: front-page.php
+msgid "RideLoop builds your loop and displays it on an interactive map. Hit \"Open in Google Maps\" to ride — it works with Android Auto and Apple CarPlay."
+msgstr "RideLoop bouwt je ronde en toont deze op een interactieve kaart. Tik op \"Openen in Google Maps\" om te rijden — werkt met Android Auto en Apple CarPlay."
+
+#: front-page.php
+msgid "Generate your first loop in under a minute — no account, no downloads."
+msgstr "Genereer je eerste ronde in minder dan een minuut — geen account, geen downloads."
+
+#: page-about.php
+msgid "About RideLoop"
+msgstr "Over RideLoop"
+
+#: page-about.php
+msgid "Why we built it, and what's ahead."
+msgstr "Waarom we het gebouwd hebben, en wat er komen gaat."
+
+#: page-about.php
+msgid "Built for riders, by riders"
+msgstr "Gebouwd voor rijders, door rijders"
+
+#: page-about.php
+msgid "RideLoop started with a simple frustration: planning a good motorcycle route takes forever. You open Google Maps, drop a few pins, realize the route goes through suburbs, redo it, and twenty minutes later you still haven't left the driveway."
+msgstr "RideLoop begon met een simpele frustratie: het plannen van een goede motorroute duurt eeuwig. Je opent Google Maps, zet een paar pins, realiseert je dat de route door buitenwijken gaat, begint opnieuw, en twintig minuten later sta je nog steeds op de oprit."
+
+#: page-about.php
+msgid "We wanted a tool that understands what motorcyclists actually want — scenic roads, twisting curves, minimal stop-and-go — and generates a ready-to-ride round-trip loop in seconds. Enter a starting point, set a duration, and go."
+msgstr "We wilden een tool die begrijpt wat motorrijders écht willen — schilderachtige wegen, bochtige curves, minimaal stop-and-go — en een rijklare rondrit in seconden genereert. Voer een startpunt in, stel een duur in en ga."
+
+#: page-about.php
+msgid "How the route generation works"
+msgstr "Hoe de routegeneratie werkt"
+
+#: page-about.php
+#. translators: 1: OSRM link, 2: OpenStreetMap link
+msgid "RideLoop uses %1$s (Open Source Routing Machine) and %2$s to calculate routes. When you select \"Twisties / Scenic,\" we bias the waypoints away from major highways and toward rural and secondary roads. When you choose \"Highways,\" we optimize for speed. The result is always a closed loop — you end exactly where you started."
+msgstr "RideLoop gebruikt %1$s (Open Source Routing Machine) en %2$s om routes te berekenen. Wanneer je \"Bochtig / Schilderachtig\" selecteert, sturen we de waypoints weg van grote snelwegen en richting landelijke secundaire wegen. Bij \"Snelwegen\" optimaliseren we op snelheid. Het resultaat is altijd een gesloten ronde — je eindigt precies waar je begon."
+
+#: page-about.php
+msgid "Once your route is generated, you can export it directly to Google Maps with all waypoints encoded in the URL — no account required, works on any device, compatible with Android Auto and CarPlay."
+msgstr "Zodra je route is gegenereerd, kun je hem direct exporteren naar Google Maps met alle waypoints in de URL — geen account vereist, werkt op elk apparaat, compatibel met Android Auto en CarPlay."
+
+#: page-about.php
+msgid "Privacy"
+msgstr "Privacy"
+
+#: page-about.php
+msgid "RideLoop runs entirely client-side. Your location is used only to center the map and pre-fill the starting address — it is never stored on our servers. All routing is handled directly between your browser and open routing services."
+msgstr "RideLoop draait volledig in je browser. Je locatie wordt alleen gebruikt om de kaart te centreren en het startadres in te vullen — het wordt nooit opgeslagen op onze servers. Alle routering verloopt rechtstreeks tussen je browser en open routeringsdiensten."
+
+#: page-about.php
+msgid "Try the Planner"
+msgstr "Probeer de planner"
+
+#: page-contact.php
+msgid "Get in touch"
+msgstr "Neem contact op"
+
+#: page-contact.php
+msgid "Questions, feedback, or just want to share your favourite route? Reach out — we'd love to hear from you."
+msgstr "Vragen, feedback, of gewoon je favoriete route delen? Stuur ons een bericht — we horen graag van je."
+
+#: page-contact.php
+msgid "Email us"
+msgstr "Stuur ons een e-mail"
+
+#: page-contact.php
+msgid "Send us a message and we'll get back to you as soon as possible."
+msgstr "Stuur ons een bericht en we reageren zo snel mogelijk."
+
+#: page-contact.php
+msgid "What can we help with?"
+msgstr "Waarmee kunnen we je helpen?"
+
+#: page-contact.php
+msgid "Bug reports or route issues"
+msgstr "Foutmeldingen of routeproblemen"
+
+#: page-contact.php
+msgid "Feature suggestions"
+msgstr "Functiesuggesties"
+
+#: page-contact.php
+msgid "Feedback on your experience"
+msgstr "Feedback over je ervaring"
+
+#: page-contact.php
+msgid "General questions about RideLoop"
+msgstr "Algemene vragen over RideLoop"
+
+#: 404.php
+msgid "Wrong turn."
+msgstr "Verkeerde afslag."
+
+#: 404.php
+msgid "Looks like this road doesn't exist. The page you're looking for has moved, been removed, or never existed."
+msgstr "Het lijkt erop dat deze weg niet bestaat. De pagina die je zoekt is verplaatst, verwijderd of heeft nooit bestaan."
+
+#: 404.php
+msgid "Go Home"
+msgstr "Naar startpagina"
+
+#: page-planner.php
+msgid "Route options"
+msgstr "Route-opties"
+
+#: page-planner.php
+msgid "Address, city, or landmark..."
+msgstr "Adres, stad of herkenningspunt..."
+
+#: page-planner.php
+msgid "Use my current location"
+msgstr "Gebruik mijn huidige locatie"
+
+#: page-planner.php
+msgid "End Point"
+msgstr "Eindpunt"
+
+#: page-planner.php
+msgid "(optional)"
+msgstr "(optioneel)"
+
+#: page-planner.php
+msgid "Leave blank for a round-trip loop..."
+msgstr "Laat leeg voor een rondrit..."
+
+#: page-planner.php
+msgid "Form steps"
+msgstr "Formulierstappen"
+
+#: page-planner.php
+msgid "Distance"
+msgstr "Afstand"
+
+#: page-planner.php
+msgid "Roads"
+msgstr "Wegen"
+
+#: page-planner.php
+msgid "Details"
+msgstr "Details"
+
+#: page-planner.php
+msgid "Plan by"
+msgstr "Plan op"
+
+#: page-planner.php
+msgid "Time"
+msgstr "Tijd"
+
+#: page-planner.php
+msgid "Approximate Trip Duration"
+msgstr "Geschatte reisduur"
+
+#: page-planner.php
+msgid "~1 hour"
+msgstr "~1 uur"
+
+#: page-planner.php
+msgid "~2 hours"
+msgstr "~2 uur"
+
+#: page-planner.php
+msgid "~3 hours"
+msgstr "~3 uur"
+
+#: page-planner.php
+msgid "Half day (~4–5 hours)"
+msgstr "Halve dag (~4–5 uur)"
+
+#: page-planner.php
+msgid "Full day (~7–8 hours)"
+msgstr "Hele dag (~7–8 uur)"
+
+#: page-planner.php
+msgid "Trip Distance"
+msgstr "Reisafstand"
+
+#: page-planner.php
+msgid "Enter the total round-trip distance (20–1200 km)."
+msgstr "Voer de totale reisafstand in (20–1200 km)."
+
+#: page-planner.php
+msgid "Next"
+msgstr "Volgende"
+
+#: page-planner.php
+msgid "Road Preference"
+msgstr "Wegvoorkeur"
+
+#: page-planner.php
+msgid "Extra Curvy"
+msgstr "Extra bochtig"
+
+#: page-planner.php
+msgid "Max turns, tight loops, winding paths"
+msgstr "Maximale bochten, kronkelende paden"
+
+#: page-planner.php
+msgid "Twisties / Scenic"
+msgstr "Bochtig / Schilderachtig"
+
+#: page-planner.php
+msgid "Backroads with character"
+msgstr "Achterwegen met karakter"
+
+#: page-planner.php
+msgid "Mixed"
+msgstr "Gemengd"
+
+#: page-planner.php
+msgid "Balance of fast and scenic"
+msgstr "Balans tussen snel en schilderachtig"
+
+#: page-planner.php
+msgid "Highways"
+msgstr "Snelwegen"
+
+#: page-planner.php
+msgid "Fast, direct roads"
+msgstr "Snelle, directe wegen"
+
+#: page-planner.php
+msgid "Scenery / Terrain"
+msgstr "Landschap / Terrein"
+
+#: page-planner.php
+msgid "Any"
+msgstr "Random"
+
+#: page-planner.php
+msgid "No terrain preference"
+msgstr "Geen terreinvoorkeur"
+
+#: page-planner.php
+msgid "Forest &amp; Woodland"
+msgstr "Bos &amp; Woudland"
+
+#: page-planner.php
+msgid "Routes through wooded areas"
+msgstr "Routes door bosrijke gebieden"
+
+#: page-planner.php
+msgid "Lakes &amp; Rivers"
+msgstr "Meren &amp; Rivieren"
+
+#: page-planner.php
+msgid "Follow waterways and coastlines"
+msgstr "Volg waterwegen en kustlijnen"
+
+#: page-planner.php
+msgid "Heathland (Heide)"
+msgstr "Heide"
+
+#: page-planner.php
+msgid "Open heather and moorland"
+msgstr "Open heide en veenland"
+
+#: page-planner.php
+msgid "Offroad &amp; Gravel"
+msgstr "Offroad &amp; Gravel"
+
+#: page-planner.php
+msgid "Includes unpaved tracks and gravel paths"
+msgstr "Inclusief onverharde tracks en grindpaden"
+
+#: page-planner.php
+msgid "Back"
+msgstr "Terug"
+
+#: page-planner.php
+msgid "Head towards"
+msgstr "Richting"
+
+#: page-planner.php
+msgid "N"
+msgstr "N"
+
+#: page-planner.php
+msgid "E"
+msgstr "O"
+
+#: page-planner.php
+msgid "S"
+msgstr "Z"
+
+#: page-planner.php
+msgid "W"
+msgstr "W"
+
+#: page-planner.php
+msgid "Avoid"
+msgstr "Vermijd"
+
+#: page-planner.php
+msgid "Highways / Motorways"
+msgstr "Snelwegen / Autosnelwegen"
+
+#: page-planner.php
+msgid "Tolls"
+msgstr "Tol"
+
+#: page-planner.php
+msgid "Ferries"
+msgstr "Veren"
+
+#: page-planner.php
+msgid "Unpaved Roads"
+msgstr "Onverharde wegen"
+
+#: page-planner.php
+msgid "Generate a route with random settings"
+msgstr "Genereer een route met willekeurige instellingen"
+
+#: page-planner.php
+msgid "Random route"
+msgstr "Willekeurige route"
+
+#: page-planner.php
+msgid "Random"
+msgstr "Willekeurig"
+
+#: page-planner.php
+msgid "Route Summary"
+msgstr "Route overzicht"
+
+#: page-planner.php
+msgid "Total Distance"
+msgstr "Totale afstand"
+
+#: page-planner.php
+msgid "Estimated Time"
+msgstr "Geschatte tijd"
+
+#: page-planner.php
+msgid "Waypoints"
+msgstr "Waypoints"
+
+#: page-planner.php
+msgid "Loop Waypoints"
+msgstr "Loop Waypoints"
+
+#: page-planner.php
+msgid "Elevation Profile"
+msgstr "Hoogteprofiel"
+
+#: page-planner.php
+msgid "Low"
+msgstr "Laag"
+
+#: page-planner.php
+msgid "High"
+msgstr "Hoog"
+
+#: page-planner.php
+msgid "Points of Interest"
+msgstr "Interessante plekken"
+
+#: page-planner.php
+msgid "Open this route in Google Maps (opens new tab)"
+msgstr "Open deze route in Google Maps (opent nieuw tabblad)"
+
+#: page-planner.php
+msgid "Open in Google Maps"
+msgstr "Openen in Google Maps"
+
+#: page-planner.php
+msgid "Share this route"
+msgstr "Deel deze route"
+
+#: page-planner.php
+msgid "Share Route"
+msgstr "Route delen"
+
+#: page-planner.php
+msgid "Start Over"
+msgstr "Opnieuw"
+
+#: page-planner.php
+msgid "Route map"
+msgstr "Routekaart"
+
+#: page-planner.php
+msgid "Interactive route map"
+msgstr "Interactieve routekaart"
+
+#: page-planner.php
+msgid "Your route will appear here"
+msgstr "Je route verschijnt hier"
+
+#: functions.php
+msgid "RideLoop Settings"
+msgstr "RideLoop instellingen"
+
+#: functions.php
+msgid "Map Configuration"
+msgstr "Kaartconfiguratie"
+
+#: functions.php
+msgid "Set the default map center shown before a route is generated."
+msgstr "Stel het standaard kaartcentrum in dat wordt weergegeven voordat een route wordt gegenereerd."
+
+#: functions.php
+msgid "Default Map Center (Latitude)"
+msgstr "Standaard kaartcentrum (breedtegraad)"
+
+#: functions.php
+msgid "Default Map Center (Longitude)"
+msgstr "Standaard kaartcentrum (lengtegraad)"
+
+#: functions.php
+msgid "Fallback latitude if geolocation is not available (default: 52.0907 — Utrecht)."
+msgstr "Standaard breedtegraad als geolocatie niet beschikbaar is (standaard: 52.0907 — Utrecht)."
+
+#: functions.php
+msgid "Fallback longitude if geolocation is not available (default: 5.1214 — Utrecht)."
+msgstr "Standaard lengtegraad als geolocatie niet beschikbaar is (standaard: 5.1214 — Utrecht)."
+
+#: functions.php
+msgid "Settings saved successfully."
+msgstr "Instellingen succesvol opgeslagen."
+
+#: functions.php
+msgid "About the Map"
+msgstr "Over de kaart"
+
+#: functions.php
+msgid "RideLoop uses OpenStreetMap for the map display and OSRM for route calculation — no API key required. The \"Open in Google Maps\" export button works without a key as well."
+msgstr "RideLoop gebruikt OpenStreetMap voor de kaartweergave en OSRM voor routeberekening — geen API-sleutel nodig. De knop \"Openen in Google Maps\" werkt ook zonder sleutel."

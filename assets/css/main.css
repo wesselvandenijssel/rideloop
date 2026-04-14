@@ -225,15 +225,7 @@ ol {
 	flex-shrink: 0;
 }
 
-/* Generate + Random side-by-side row */
-.generate-row {
-	display: flex;
-	gap: 8px;
-	align-items: stretch;
-}
-.generate-row .btn--primary {
-	flex: 1;
-}
+/* Generate + Random side-by-side row (now lives in step 3 footer) */
 
 /* Icon-only button */
 .btn--icon {
@@ -276,11 +268,70 @@ ol {
 }
 
 /* --------------------------------------------------------------------------
+   Topbar
+   -------------------------------------------------------------------------- */
+.site-topbar {
+	background: #111111;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.55);
+	position: sticky;
+	top: 0;
+	z-index: 101;
+}
+
+.site-topbar .container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+
+.site-topbar__usps {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	flex-wrap: wrap;
+}
+
+.site-topbar__usps li {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	white-space: nowrap;
+}
+
+.site-topbar__usps svg {
+	color: var(--color-orange);
+	flex-shrink: 0;
+}
+
+.site-topbar__contact {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	color: rgba(255, 255, 255, 0.45);
+	font-size: 12px;
+	white-space: nowrap;
+	flex-shrink: 0;
+	transition: color var(--transition);
+}
+
+.site-topbar__contact:hover {
+	color: var(--color-orange);
+}
+
+/* --------------------------------------------------------------------------
    Site Header
    -------------------------------------------------------------------------- */
 .site-header {
 	position: sticky;
-	top: 0;
+	top: 33px; /* height of topbar */
 	z-index: 100;
 	background: var(--color-dark);
 	height: var(--header-height);
@@ -333,6 +384,63 @@ ol {
 	flex-shrink: 0;
 	font-size: var(--font-size-sm);
 	padding: 8px 18px;
+}
+
+/* Language switcher — desktop */
+.lang-switcher {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	flex-shrink: 0;
+}
+
+.lang-switcher li {
+	display: flex;
+	align-items: center;
+}
+
+.lang-switcher li a,
+.lang-switcher li span {
+	display: block;
+	padding: 4px 8px;
+	font-size: var(--font-size-sm);
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--color-text-muted);
+	border-radius: var(--radius-sm);
+	text-decoration: none;
+	transition: color var(--transition), background var(--transition);
+}
+
+.lang-switcher li a:hover {
+	color: #fff;
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.lang-switcher li.current-lang a,
+.lang-switcher li.current-lang span {
+	color: #fff;
+	font-weight: 600;
+}
+
+.lang-switcher li:not(:last-child)::after {
+	content: '/';
+	color: var(--color-text-muted);
+	font-size: var(--font-size-sm);
+	opacity: 0.4;
+	padding-left: 2px;
+}
+
+/* Language switcher — mobile */
+.lang-switcher--mobile {
+	justify-content: center;
+	padding: 8px 0 4px;
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	margin-top: 4px;
 }
 
 /* Mobile toggle */
@@ -389,57 +497,124 @@ ol {
 .site-footer {
 	background: var(--color-dark);
 	color: rgba(255, 255, 255, 0.7);
-	padding: 48px 0 0;
-	margin-top: 80px;
+	padding: 60px 0 0;
 }
 
 .site-footer__inner {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 40px;
-	padding-bottom: 40px;
+	display: grid;
+	grid-template-columns: 1.8fr 1fr 1.4fr;
+	gap: 48px;
+	padding-bottom: 48px;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Brand column */
+.site-footer__brand {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 }
 
 .site-footer__logo-img {
 	filter: brightness(0) invert(1);
 	opacity: 0.9;
-	margin-bottom: 12px;
 }
 
 .site-footer__tagline {
 	font-size: var(--font-size-sm);
-	color: rgba(255, 255, 255, 0.45);
+	color: rgba(255, 255, 255, 0.55);
 	font-style: italic;
+	margin: 0;
 }
 
-.site-footer__nav ul {
+.site-footer__desc {
+	font-size: var(--font-size-sm);
+	color: rgba(255, 255, 255, 0.38);
+	line-height: 1.6;
+	margin: 0;
+	max-width: 260px;
+}
+
+/* Nav / CTA columns */
+.site-footer__col {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: 16px;
 }
+
+.site-footer__col-title {
+	font-size: var(--font-size-sm);
+	font-weight: 700;
+	color: rgba(255, 255, 255, 0.9);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	margin: 0;
+}
+
+.site-footer__nav {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
 .site-footer__nav a {
-	color: rgba(255, 255, 255, 0.65);
+	color: rgba(255, 255, 255, 0.55);
 	font-size: var(--font-size-sm);
 	font-weight: 500;
 	transition: color var(--transition);
 }
+
 .site-footer__nav a:hover {
 	color: var(--color-orange);
 }
 
-.site-footer__bottom {
-	padding: 20px 0;
-	text-align: center;
+.site-footer__cta-desc {
 	font-size: var(--font-size-sm);
+	color: rgba(255, 255, 255, 0.45);
+	margin: 0;
+	line-height: 1.5;
+}
+
+.site-footer__cta-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	width: fit-content;
+	padding: 10px 18px;
+	font-size: var(--font-size-sm);
+}
+
+/* Bottom bar */
+.site-footer__bottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	padding: 20px 0;
+	font-size: 12px;
+}
+
+.site-footer__copy {
 	color: rgba(255, 255, 255, 0.35);
+	margin: 0;
 }
-.site-footer__bottom a {
+
+.site-footer__copy a {
 	color: rgba(255, 255, 255, 0.5);
+	transition: color var(--transition);
 }
-.site-footer__bottom a:hover {
+
+.site-footer__copy a:hover {
 	color: var(--color-orange);
+}
+
+.site-footer__legal {
+	color: rgba(255, 255, 255, 0.22);
+	margin: 0;
+	text-align: right;
 }
 
 /* --------------------------------------------------------------------------
@@ -682,12 +857,6 @@ ol {
 /* --------------------------------------------------------------------------
    Planner Page
    -------------------------------------------------------------------------- */
-.planner-page__header {
-	background: var(--color-dark);
-	padding: 32px 0;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
 .planner-page__title {
 	font-size: var(--font-size-2xl);
 	font-weight: 800;
@@ -741,10 +910,33 @@ ol {
 .planner-location-wrap {
 	flex-shrink: 0;
 	padding: 20px 20px 16px;
+	position: relative;
+	z-index: 210;
+	background: var(--color-bg);
+}
+
+/* End point input — same out-of-flow treatment, slightly lower z-index
+   so start dropdown always appears on top. */
+.planner-end-wrap {
+	flex-shrink: 0;
+	padding: 0 20px 16px;
 	border-bottom: 1px solid var(--color-border);
 	position: relative;
 	z-index: 200;
 	background: var(--color-bg);
+	flex-shrink: 0;
+	padding: 20px 20px 16px;
+	border-bottom: 1px solid var(--color-border);
+	position: relative;
+	z-index: 200;
+	background: var(--color-bg);
+}
+
+.form-label__optional {
+	font-weight: 400;
+	font-size: var(--font-size-sm);
+	color: var(--color-text-muted);
+	margin-left: 4px;
 }
 
 /* Scrollable body — all options below location input + route summary */
@@ -1041,6 +1233,115 @@ legend {
 /* --------------------------------------------------------------------------
    Route Summary
    -------------------------------------------------------------------------- */
+.route-summary__actions {
+	display: flex;
+	gap: 8px;
+}
+.route-summary__actions .btn {
+	flex: 1;
+}
+
+.route-filter-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.route-filter-tags:empty {
+	display: none;
+}
+
+.filter-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 3px 10px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	border-radius: 99px;
+	background: rgba(255, 107, 0, 0.1);
+	color: var(--color-orange-dark);
+	border: 1px solid rgba(255, 107, 0, 0.2);
+	white-space: nowrap;
+}
+
+.poi-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.poi-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 10px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background 0.15s;
+	border: 1px solid transparent;
+}
+
+.poi-item:hover {
+	background: rgba(255, 107, 0, 0.06);
+	border-color: rgba(255, 107, 0, 0.15);
+}
+
+.poi-item__dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: var(--color-orange);
+	flex-shrink: 0;
+	box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
+}
+
+.poi-item__info {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	flex: 1;
+	min-width: 0;
+}
+
+.poi-item__name {
+	font-size: 0.85rem;
+	font-weight: 500;
+	color: var(--color-text);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.poi-item__rating {
+	font-size: 0.72rem;
+	color: var(--color-orange);
+	letter-spacing: 0.01em;
+}
+
+.poi-item__link {
+	flex-shrink: 0;
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: var(--color-orange);
+	text-decoration: none;
+	padding: 3px 7px;
+	border-radius: 99px;
+	border: 1px solid rgba(255, 107, 0, 0.3);
+	opacity: 0.8;
+	transition:
+		opacity 0.15s,
+		background 0.15s;
+}
+
+.poi-item__link:hover {
+	opacity: 1;
+	background: rgba(255, 107, 0, 0.08);
+}
+
 .route-summary {
 	display: flex;
 	flex-direction: column;
@@ -1288,55 +1589,36 @@ legend {
 }
 
 /* --------------------------------------------------------------------------
-   PlaceAutocompleteElement — new Google Maps Places web component
-   Replaces the legacy Autocomplete class (unavailable to accounts after March 2025).
+   Photon Autocomplete Dropdown
+   Shared by planner page (start/end inputs) and hero input on front page.
    -------------------------------------------------------------------------- */
-gmp-place-autocomplete {
-	display: block;
-	flex: 1;
-	min-width: 0;
-	border-radius: 10px;
-	/* Force light-mode rendering inside the shadow DOM.
-     Without this, the OS dark mode reaches into the component and makes the
-     background dark. Combined with our dark --color-text override that produces
-     black text on a black background. */
-	color-scheme: light;
-	--gmp-material-color-primary: var(--color-orange);
-}
-
-/* Explicit colors so the input is always readable regardless of OS color scheme. */
-gmp-place-autocomplete::part(input) {
-	font-size: var(--font-size-base, 15px);
-	font-family: var(--font-base, Inter, sans-serif);
-	color: #1a1a1a;
-	background-color: #ffffff;
-}
-
-/* --------------------------------------------------------------------------
-   Google Places Autocomplete dropdown — override default styling
-   -------------------------------------------------------------------------- */
-.pac-container {
+.autocomplete-dropdown {
+	position: absolute;
+	top: calc(100% + 4px);
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	list-style: none;
+	margin: 0;
+	padding: 4px 0;
+	background: var(--color-bg, #fff);
+	border: 1px solid var(--color-border);
 	border-radius: var(--radius);
 	box-shadow: var(--shadow-lg);
-	border: 1px solid var(--color-border);
 	font-family: var(--font-base);
-	margin-top: 4px;
+	max-height: 240px;
+	overflow-y: auto;
 }
-.pac-item {
-	padding: 8px 14px;
-	font-size: var(--font-size-sm);
-	cursor: pointer;
-}
-.pac-item:hover,
-.pac-item-selected {
-	background: rgba(255, 107, 0, 0.07);
-}
-.pac-matched {
-	font-weight: 600;
-}
-.pac-item-query {
+.autocomplete-dropdown li {
+	padding: 9px 14px;
 	font-size: var(--font-size-sm);
 	color: var(--color-text);
+	cursor: pointer;
+	line-height: 1.4;
+}
+.autocomplete-dropdown li:hover,
+.autocomplete-dropdown li.is-active {
+	background: rgba(255, 107, 0, 0.07);
 }
 
 /* --------------------------------------------------------------------------
@@ -1548,8 +1830,23 @@ gmp-place-autocomplete::part(input) {
 		padding: 0 16px;
 	}
 
+	/* Topbar: hide USPs, show only contact link */
+	.site-topbar__usps {
+		display: none;
+	}
+
+	.site-topbar .container {
+		justify-content: flex-end;
+	}
+
+	/* Header sits right below collapsed topbar */
+	.site-header {
+		top: 32px;
+	}
+
 	.site-nav,
-	.site-header__cta {
+	.site-header__cta,
+	.lang-switcher:not(.lang-switcher--mobile) {
 		display: none;
 	}
 
@@ -1572,15 +1869,38 @@ gmp-place-autocomplete::part(input) {
 	}
 
 	.site-footer__inner {
-		flex-direction: column;
-		align-items: center;
+		grid-template-columns: 1fr;
+		gap: 32px;
 		text-align: center;
-		gap: 24px;
 	}
 
-	.site-footer__nav ul {
+	.site-footer__brand {
+		align-items: center;
+	}
+
+	.site-footer__desc {
+		max-width: 100%;
+	}
+
+	.site-footer__col {
+		align-items: center;
+	}
+
+	.site-footer__nav {
 		flex-direction: row;
 		justify-content: center;
+		flex-wrap: wrap;
+		gap: 8px 20px;
+	}
+
+	.site-footer__bottom {
+		flex-direction: column;
+		text-align: center;
+		gap: 6px;
+	}
+
+	.site-footer__legal {
+		text-align: center;
 	}
 
 	.route-summary__stats {
@@ -1594,4 +1914,396 @@ gmp-place-autocomplete::part(input) {
 		flex-direction: column;
 		align-items: center;
 	}
+}
+
+/* ---- Weather card ---- */
+.route-summary__weather {
+	margin: 0;
+}
+
+.weather-card {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 14px;
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: 10px;
+}
+
+.weather-icon {
+	font-size: 2rem;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.weather-details {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.weather-temp {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--color-text);
+	line-height: 1;
+}
+
+.weather-label {
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: var(--color-text);
+}
+
+.weather-meta {
+	font-size: 0.75rem;
+	color: var(--color-text-muted);
+}
+
+/* ---- Elevation profile ---- */
+.elevation-chart-wrap {
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: 8px;
+	overflow: hidden;
+	line-height: 0;
+}
+
+.elevation-chart {
+	display: block;
+	width: 100%;
+	height: 72px;
+}
+
+.elevation-stats {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 6px;
+	padding: 0 2px;
+}
+
+.elevation-stat {
+	font-size: 0.75rem;
+	color: var(--color-text-muted);
+	display: flex;
+	gap: 4px;
+}
+
+.elevation-stat__label {
+	font-weight: 600;
+	color: var(--color-text-muted);
+}
+
+.elevation-stat__value {
+	color: var(--color-orange);
+	font-weight: 600;
+}
+
+/* =========================================================================
+   Step Wizard
+   ========================================================================= */
+
+/* Step nav bar */
+.step-nav {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 20px;
+}
+
+.step-nav__item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	flex-shrink: 0;
+	cursor: default;
+}
+
+.step-nav__num {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 13px;
+	font-weight: 700;
+	background: var(--color-surface);
+	border: 2px solid var(--color-border);
+	color: var(--color-text-muted);
+	transition:
+		background 0.2s,
+		border-color 0.2s,
+		color 0.2s;
+}
+
+.step-nav__label {
+	font-size: 11px;
+	color: var(--color-text-muted);
+	text-align: center;
+}
+
+.step-nav__item.is-active .step-nav__num {
+	background: var(--color-orange);
+	border-color: var(--color-orange);
+	color: #fff;
+}
+
+.step-nav__item.is-active .step-nav__label {
+	color: var(--color-orange);
+	font-weight: 600;
+}
+
+.step-nav__item.is-done .step-nav__num {
+	background: rgba(255, 107, 0, 0.15);
+	border-color: var(--color-orange);
+	color: var(--color-orange);
+	cursor: pointer;
+}
+
+.step-nav__line {
+	flex: 1;
+	height: 2px;
+	background: var(--color-border);
+	margin: 14px 6px 0;
+	border-radius: 1px;
+}
+
+/* Step panels — only active one visible */
+.planner-step {
+	display: none;
+}
+
+.planner-step.is-active {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+/* Footer with Back/Next buttons */
+.step-footer {
+	display: flex;
+	gap: 8px;
+	margin-top: 20px;
+	padding-top: 16px;
+	border-top: 1px solid var(--color-border);
+}
+
+.step-footer .btn-next {
+	flex: 1;
+}
+
+/* Generate row in step 3 */
+.generate-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: stretch;
+	margin-top: 0;
+	padding-top: 0;
+	border-top: none;
+}
+
+.generate-row .btn-back {
+	width: 100%;
+}
+
+.generate-row #btn-generate {
+	flex: 1;
+	min-width: 0;
+}
+
+/* POI overflow collapse */
+.poi-overflow {
+	overflow: hidden;
+}
+
+.poi-overflow[hidden] {
+	display: none;
+}
+
+.poi-toggle {
+	display: block;
+	width: 100%;
+	margin-top: 8px;
+	padding: 8px;
+	background: none;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+	color: var(--color-orange);
+	font-size: var(--font-size-sm);
+	font-weight: 600;
+	cursor: pointer;
+	text-align: center;
+	transition:
+		background 0.15s,
+		border-color 0.15s;
+}
+
+.poi-toggle:hover {
+	background: rgba(255, 107, 0, 0.08);
+	border-color: var(--color-orange);
+}
+
+/* Google Maps tip */
+.gmaps-tip {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	background: rgba(255, 107, 0, 0.07);
+	border: 1px solid rgba(255, 107, 0, 0.25);
+	border-radius: var(--radius);
+	padding: 12px 14px;
+	margin-top: 10px;
+	font-size: var(--font-size-sm);
+	color: var(--color-text);
+}
+
+.gmaps-tip__icon {
+	flex-shrink: 0;
+	font-size: 16px;
+	line-height: 1.4;
+}
+
+.gmaps-tip__body {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.gmaps-tip__body p {
+	margin: 0;
+	color: var(--color-text-muted);
+	line-height: 1.5;
+}
+
+.gmaps-tip__tag {
+	display: inline-block;
+	background: rgba(255, 107, 0, 0.15);
+	color: var(--color-orange);
+	border-radius: 4px;
+	padding: 1px 7px;
+	font-weight: 600;
+	margin: 2px 2px 0 0;
+}
+
+/* =========================================================================
+   Contact Page
+   ========================================================================= */
+
+.contact-hero {
+    background: linear-gradient(135deg, var(--color-dark) 0%, var(--color-dark-mid) 100%);
+    padding: 64px 0 56px;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.contact-hero__title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 12px;
+}
+
+.contact-hero__subtitle {
+    font-size: var(--font-size-lg);
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 48px 0 80px;
+}
+
+.contact-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg, 12px);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contact-card__icon {
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 107, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-orange);
+}
+
+.contact-card__title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.contact-card__desc {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.contact-card__email {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-orange);
+    font-weight: 600;
+    font-size: var(--font-size-base);
+    word-break: break-all;
+    transition: opacity var(--transition);
+}
+
+.contact-card__email:hover {
+    opacity: 0.8;
+}
+
+.contact-card__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-card__list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.contact-card__list li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+        padding: 32px 0 56px;
+    }
+
+    .contact-card {
+        padding: 28px 24px;
+    }
 }

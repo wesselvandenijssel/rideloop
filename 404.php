@@ -21,18 +21,17 @@ get_header();
                 </svg>
             </div>
 
-            <h1 class="error-404__title">Wrong turn.</h1>
+            <h1 class="error-404__title"><?php esc_html_e( 'Wrong turn.', 'rideloop' ); ?></h1>
             <p class="error-404__message">
-                Looks like this road doesn't exist. The page you're looking for
-                has moved, been removed, or never existed.
+                <?php esc_html_e( "Looks like this road doesn't exist. The page you're looking for has moved, been removed, or never existed.", 'rideloop' ); ?>
             </p>
 
             <div class="error-404__actions">
                 <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn--primary btn--lg">
-                    Go Home
+                    <?php esc_html_e( 'Go Home', 'rideloop' ); ?>
                 </a>
                 <a href="<?php echo esc_url( rideloop_get_planner_url() ); ?>" class="btn btn--outline btn--lg">
-                    Plan a Ride
+                    <?php esc_html_e( 'Plan a Ride', 'rideloop' ); ?>
                 </a>
             </div>
 

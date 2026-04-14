@@ -328,28 +328,16 @@ get_header();
                             <button
                                 type="submit"
                                 id="btn-generate"
-                                <<<<<<< HEAD
                                 class="btn btn--primary btn--lg">
-                                <span class="btn__text">Generate Route</span>
-                                =======
-                                class="btn btn--primary btn--lg"
-                                <?php echo ! $has_api_key ? 'disabled' : ''; ?>>
                                 <span class="btn__text"><?php esc_html_e('Generate Route', 'rideloop'); ?></span>
-                                >>>>>>> 69e8a377e502e36c5c07c4d154267177171f8587
                                 <span class="btn__spinner" aria-hidden="true" hidden></span>
                             </button>
                             <button
                                 type="button"
                                 id="btn-random"
                                 class="btn btn--ghost btn--icon-label"
-                                <<<<<<< HEAD
-                                title="Generate a route with random settings"
-                                aria-label="Random route">
-                                =======
                                 title="<?php esc_attr_e('Generate a route with random settings', 'rideloop'); ?>"
-                                aria-label="<?php esc_attr_e('Random route', 'rideloop'); ?>"
-                                <?php echo ! $has_api_key ? 'disabled' : ''; ?>>
-                                >>>>>>> 69e8a377e502e36c5c07c4d154267177171f8587
+                                aria-label="<?php esc_attr_e('Random route', 'rideloop'); ?>">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                     <polyline points="16 3 21 3 21 8" />
                                     <line x1="4" y1="20" x2="21" y2="3" />

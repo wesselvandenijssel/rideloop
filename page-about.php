@@ -39,11 +39,11 @@ get_header();
             <section class="about-section">
                 <h2>How the route generation works</h2>
                 <p>
-                    RideLoop uses the <strong>Google Maps Directions API</strong> to calculate routes.
-                    When you select "Twisties / Scenic," we bias the waypoints away from major
-                    highways and toward rural and secondary roads. When you choose "Highways,"
-                    we optimize for speed. The result is always a closed loop — you end exactly
-                    where you started.
+                    RideLoop uses <strong>OSRM</strong> (Open Source Routing Machine) and
+                    <strong>OpenStreetMap</strong> to calculate routes. When you select
+                    "Twisties / Scenic," we bias the waypoints away from major highways and toward
+                    rural and secondary roads. When you choose "Highways," we optimize for speed.
+                    The result is always a closed loop — you end exactly where you started.
                 </p>
                 <p>
                     Once your route is generated, you can export it directly to Google Maps with
@@ -57,7 +57,7 @@ get_header();
                 <p>
                     RideLoop runs entirely client-side. Your location is used only to center
                     the map and pre-fill the starting address — it is never stored on our servers.
-                    All routing is handled directly between your browser and Google Maps.
+                    All routing is handled directly between your browser and open routing services.
                 </p>
             </section>
 

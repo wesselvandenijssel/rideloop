@@ -46,7 +46,7 @@
                 &mdash; <?php esc_html_e( 'Built for riders, by riders.', 'rideloop' ); ?>
             </p>
             <p class="site-footer__legal">
-                Powered by Google Maps &middot; Routes are suggestions only &mdash; always ride safely.
+                Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &middot; Routes are suggestions only &mdash; always ride safely.
             </p>
         </div>
 

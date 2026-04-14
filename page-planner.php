@@ -6,35 +6,19 @@
  * page-planner.php — Full route generation interface.
  *
  * Single-page experience: no reloads. All interactivity is driven by
- * assets/js/planner.js via the Google Maps JS API.
+ * assets/js/planner.js using Leaflet (OSM tiles) + OSRM routing.
  *
  * Panel structure (important for autocomplete dropdown visibility):
  *   .planner-location-wrap  — sits OUTSIDE the overflow-y:auto container
- *                             so the PlaceAutocompleteElement dropdown is
- *                             never clipped by a scroll ancestor.
+ *                             so the autocomplete dropdown is never clipped
+ *                             by a scroll ancestor.
  *   .planner-panel__body    — overflow-y:auto; contains all other options.
  */
 
 get_header();
-
-$has_api_key = ! empty(get_option('rideloop_google_maps_api_key', ''));
 ?>
 
 <main id="main-content" class="site-main planner-page" role="main">
-
-    <?php if (! $has_api_key) : ?>
-        <div class="planner-notice planner-notice--warning">
-            <div class="container">
-                <p>
-                    <strong>Setup required:</strong>
-                    No Google Maps API key is configured.
-                    <?php if (current_user_can('manage_options')) : ?>
-                        <a href="<?php echo esc_url(admin_url('options-general.php?page=rideloop-settings')); ?>">Go to RideLoop Settings &rarr;</a>
-                    <?php endif; ?>
-                </p>
-            </div>
-        </div>
-    <?php endif; ?>
 
     <div class="planner-layout">
 
@@ -344,8 +328,7 @@ $has_api_key = ! empty(get_option('rideloop_google_maps_api_key', ''));
                             <button
                                 type="submit"
                                 id="btn-generate"
-                                class="btn btn--primary btn--lg"
-                                <?php echo ! $has_api_key ? 'disabled' : ''; ?>>
+                                class="btn btn--primary btn--lg">
                                 <span class="btn__text">Generate Route</span>
                                 <span class="btn__spinner" aria-hidden="true" hidden></span>
                             </button>
@@ -354,8 +337,7 @@ $has_api_key = ! empty(get_option('rideloop_google_maps_api_key', ''));
                                 id="btn-random"
                                 class="btn btn--ghost btn--icon-label"
                                 title="Generate a route with random settings"
-                                aria-label="Random route"
-                                <?php echo ! $has_api_key ? 'disabled' : ''; ?>>
+                                aria-label="Random route">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                     <polyline points="16 3 21 3 21 8" />
                                     <line x1="4" y1="20" x2="21" y2="3" />

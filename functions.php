@@ -52,7 +52,7 @@ function rideloop_enqueue_assets() {
         $version
     );
 
-    // Main JS (utilities, nav toggle, etc.)
+    // Main JS (utilities, nav toggle, hero autocomplete)
     wp_enqueue_script(
         'rideloop-main',
         get_template_directory_uri() . '/assets/js/main.js',
@@ -61,53 +61,41 @@ function rideloop_enqueue_assets() {
         true // load in footer
     );
 
-    // Load Google Maps Places on the front page for hero autocomplete
-    if (is_front_page()) {
-        $api_key = get_option('rideloop_google_maps_api_key', '');
-        if (! empty($api_key)) {
-            wp_enqueue_script(
-                'google-maps-api-hero',
-                'https://maps.googleapis.com/maps/api/js?key=' . esc_attr($api_key) . '&loading=async&libraries=places&callback=rideloopInitHero',
-                ['rideloop-main'],
-                null,
-                true
-            );
-        }
-    }
-
-    // Only load the planner script + Google Maps on the planner page
+    // Only load Leaflet + planner script on the planner page
     if (is_page_template('page-planner.php')) {
-        $api_key = get_option('rideloop_google_maps_api_key', '');
 
-        // Google Maps JS API (with Places library)
-        // The callback "rideloopInitMap" is defined in planner.js
-        if (! empty($api_key)) {
-            wp_enqueue_script(
-                'google-maps-api',
-                'https://maps.googleapis.com/maps/api/js?key=' . esc_attr($api_key) . '&loading=async&libraries=places&callback=rideloopInitMap',
-                ['rideloop-planner'], // load after planner.js so callback exists
-                null,
-                true
-            );
-        }
+        // Leaflet CSS
+        wp_enqueue_style(
+            'leaflet',
+            'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+            [],
+            '1.9.4'
+        );
+
+        // Leaflet JS
+        wp_enqueue_script(
+            'leaflet',
+            'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+            [],
+            '1.9.4',
+            true
+        );
 
         // Planner JS — core route generation + map logic
         wp_enqueue_script(
             'rideloop-planner',
             get_template_directory_uri() . '/assets/js/planner.js',
-            [],
+            ['leaflet'],
             $version,
             true
         );
 
-        // Pass PHP options to JS via wp_localize_script
+        // Pass PHP options to JS
         wp_localize_script('rideloop-planner', 'rideloopData', [
-            'apiKey'        => $api_key,
-            'defaultLat'    => get_option('rideloop_default_lat', '52.0907'),
-            'defaultLng'    => get_option('rideloop_default_lng', '5.1214'),
-            'hasApiKey'     => ! empty($api_key),
-            'ajaxUrl'       => admin_url('admin-ajax.php'),
-            'nonce'         => wp_create_nonce('rideloop_nonce'),
+            'defaultLat' => get_option('rideloop_default_lat', '52.0907'),
+            'defaultLng' => get_option('rideloop_default_lng', '5.1214'),
+            'ajaxUrl'    => admin_url('admin-ajax.php'),
+            'nonce'      => wp_create_nonce('rideloop_nonce'),
         ]);
     }
 }
@@ -137,9 +125,6 @@ add_action('admin_menu', 'rideloop_admin_menu');
  */
 function rideloop_register_settings() {
     // Register each option with sanitization
-    register_setting('rideloop_settings_group', 'rideloop_google_maps_api_key', [
-        'sanitize_callback' => 'sanitize_text_field',
-    ]);
     register_setting('rideloop_settings_group', 'rideloop_default_lat', [
         'sanitize_callback' => 'rideloop_sanitize_coordinate',
     ]);
@@ -150,18 +135,9 @@ function rideloop_register_settings() {
     // Main settings section
     add_settings_section(
         'rideloop_main_section',
-        __('Google Maps Configuration', 'rideloop'),
+        __('Map Configuration', 'rideloop'),
         'rideloop_main_section_callback',
         'rideloop-settings'
-    );
-
-    // API Key field
-    add_settings_field(
-        'rideloop_google_maps_api_key',
-        __('Google Maps API Key', 'rideloop'),
-        'rideloop_api_key_field_callback',
-        'rideloop-settings',
-        'rideloop_main_section'
     );
 
     // Default center — lat
@@ -196,16 +172,7 @@ function rideloop_sanitize_coordinate($value) {
  * Section description callback
  */
 function rideloop_main_section_callback() {
-    echo '<p>' . esc_html__('Enter your Google Maps API key and optional default map location. The API key must have Maps JavaScript API and Places API enabled.', 'rideloop') . '</p>';
-}
-
-/**
- * API Key field — rendered as password input for security
- */
-function rideloop_api_key_field_callback() {
-    $value = get_option('rideloop_google_maps_api_key', '');
-    echo '<input type="password" id="rideloop_google_maps_api_key" name="rideloop_google_maps_api_key" value="' . esc_attr($value) . '" class="regular-text" autocomplete="new-password" />';
-    echo '<p class="description">' . esc_html__('Required for map display, route planning, and location autocomplete.', 'rideloop') . '</p>';
+    echo '<p>' . esc_html__('Set the default map center shown before a route is generated.', 'rideloop') . '</p>';
 }
 
 /**
@@ -252,13 +219,8 @@ function rideloop_settings_page() {
         </form>
 
         <hr>
-        <h2><?php esc_html_e('Quick Setup Guide', 'rideloop'); ?></h2>
-        <ol>
-            <li><?php esc_html_e('Go to Google Cloud Console and create or select a project.', 'rideloop'); ?></li>
-            <li><?php esc_html_e('Enable: Maps JavaScript API, Places API, and Directions API.', 'rideloop'); ?></li>
-            <li><?php esc_html_e('Create an API key and restrict it to your domain for security.', 'rideloop'); ?></li>
-            <li><?php esc_html_e('Paste the key above and save.', 'rideloop'); ?></li>
-        </ol>
+        <h2><?php esc_html_e('About the Map', 'rideloop'); ?></h2>
+        <p><?php esc_html_e('RideLoop uses OpenStreetMap for the map display and OSRM for route calculation — no API key required. The "Open in Google Maps" export button works without a key as well.', 'rideloop'); ?></p>
     </div>
 <?php
 }

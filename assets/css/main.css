@@ -1532,55 +1532,36 @@ legend {
 }
 
 /* --------------------------------------------------------------------------
-   PlaceAutocompleteElement — new Google Maps Places web component
-   Replaces the legacy Autocomplete class (unavailable to accounts after March 2025).
+   Photon Autocomplete Dropdown
+   Shared by planner page (start/end inputs) and hero input on front page.
    -------------------------------------------------------------------------- */
-gmp-place-autocomplete {
-	display: block;
-	flex: 1;
-	min-width: 0;
-	border-radius: 10px;
-	/* Force light-mode rendering inside the shadow DOM.
-     Without this, the OS dark mode reaches into the component and makes the
-     background dark. Combined with our dark --color-text override that produces
-     black text on a black background. */
-	color-scheme: light;
-	--gmp-material-color-primary: var(--color-orange);
-}
-
-/* Explicit colors so the input is always readable regardless of OS color scheme. */
-gmp-place-autocomplete::part(input) {
-	font-size: var(--font-size-base, 15px);
-	font-family: var(--font-base, Inter, sans-serif);
-	color: #1a1a1a;
-	background-color: #ffffff;
-}
-
-/* --------------------------------------------------------------------------
-   Google Places Autocomplete dropdown — override default styling
-   -------------------------------------------------------------------------- */
-.pac-container {
+.autocomplete-dropdown {
+	position: absolute;
+	top: calc(100% + 4px);
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	list-style: none;
+	margin: 0;
+	padding: 4px 0;
+	background: var(--color-bg, #fff);
+	border: 1px solid var(--color-border);
 	border-radius: var(--radius);
 	box-shadow: var(--shadow-lg);
-	border: 1px solid var(--color-border);
 	font-family: var(--font-base);
-	margin-top: 4px;
+	max-height: 240px;
+	overflow-y: auto;
 }
-.pac-item {
-	padding: 8px 14px;
-	font-size: var(--font-size-sm);
-	cursor: pointer;
-}
-.pac-item:hover,
-.pac-item-selected {
-	background: rgba(255, 107, 0, 0.07);
-}
-.pac-matched {
-	font-weight: 600;
-}
-.pac-item-query {
+.autocomplete-dropdown li {
+	padding: 9px 14px;
 	font-size: var(--font-size-sm);
 	color: var(--color-text);
+	cursor: pointer;
+	line-height: 1.4;
+}
+.autocomplete-dropdown li:hover,
+.autocomplete-dropdown li.is-active {
+	background: rgba(255, 107, 0, 0.07);
 }
 
 /* --------------------------------------------------------------------------

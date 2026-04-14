@@ -104,7 +104,7 @@ msgid "Built for riders, by riders."
 msgstr ""
 
 #: footer.php
-msgid "Powered by Google Maps · Routes are suggestions only — always ride safely."
+msgid "Map data &copy; %s contributors &middot; Routes are suggestions only &mdash; always ride safely."
 msgstr ""
 
 #: front-page.php
@@ -228,7 +228,8 @@ msgid "How the route generation works"
 msgstr ""
 
 #: page-about.php
-msgid "RideLoop uses the %s to calculate routes. When you select \"Twisties / Scenic,\" we bias the waypoints away from major highways and toward rural and secondary roads. When you choose \"Highways,\" we optimize for speed. The result is always a closed loop — you end exactly where you started."
+#. translators: 1: OSRM link, 2: OpenStreetMap link
+msgid "RideLoop uses %1$s (Open Source Routing Machine) and %2$s to calculate routes. When you select \"Twisties / Scenic,\" we bias the waypoints away from major highways and toward rural and secondary roads. When you choose \"Highways,\" we optimize for speed. The result is always a closed loop — you end exactly where you started."
 msgstr ""
 
 #: page-about.php
@@ -240,7 +241,7 @@ msgid "Privacy"
 msgstr ""
 
 #: page-about.php
-msgid "RideLoop runs entirely client-side. Your location is used only to center the map and pre-fill the starting address — it is never stored on our servers. All routing is handled directly between your browser and Google Maps."
+msgid "RideLoop runs entirely client-side. Your location is used only to center the map and pre-fill the starting address — it is never stored on our servers. All routing is handled directly between your browser and open routing services."
 msgstr ""
 
 #: page-about.php
@@ -293,18 +294,6 @@ msgstr ""
 
 #: 404.php
 msgid "Go Home"
-msgstr ""
-
-#: page-planner.php
-msgid "Setup required:"
-msgstr ""
-
-#: page-planner.php
-msgid "No Google Maps API key is configured."
-msgstr ""
-
-#: page-planner.php
-msgid "Go to RideLoop Settings"
 msgstr ""
 
 #: page-planner.php
@@ -595,20 +584,16 @@ msgstr ""
 msgid "Your route will appear here"
 msgstr ""
 
-#: page-planner.php
-msgid "Map unavailable — API key not configured"
-msgstr ""
-
 #: functions.php
 msgid "RideLoop Settings"
 msgstr ""
 
 #: functions.php
-msgid "Google Maps Configuration"
+msgid "Map Configuration"
 msgstr ""
 
 #: functions.php
-msgid "Google Maps API Key"
+msgid "Set the default map center shown before a route is generated."
 msgstr ""
 
 #: functions.php
@@ -617,14 +602,6 @@ msgstr ""
 
 #: functions.php
 msgid "Default Map Center (Longitude)"
-msgstr ""
-
-#: functions.php
-msgid "Enter your Google Maps API key and optional default map location. The API key must have Maps JavaScript API and Places API enabled."
-msgstr ""
-
-#: functions.php
-msgid "Required for map display, route planning, and location autocomplete."
 msgstr ""
 
 #: functions.php
@@ -640,21 +617,9 @@ msgid "Settings saved successfully."
 msgstr ""
 
 #: functions.php
-msgid "Quick Setup Guide"
+msgid "About the Map"
 msgstr ""
 
 #: functions.php
-msgid "Go to Google Cloud Console and create or select a project."
-msgstr ""
-
-#: functions.php
-msgid "Enable: Maps JavaScript API, Places API, and Directions API."
-msgstr ""
-
-#: functions.php
-msgid "Create an API key and restrict it to your domain for security."
-msgstr ""
-
-#: functions.php
-msgid "Paste the key above and save."
+msgid "RideLoop uses OpenStreetMap for the map display and OSRM for route calculation — no API key required. The \"Open in Google Maps\" export button works without a key as well."
 msgstr ""

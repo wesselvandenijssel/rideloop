@@ -103,8 +103,8 @@ msgid "Built for riders, by riders."
 msgstr "Gebouwd voor rijders, door rijders."
 
 #: footer.php
-msgid "Powered by Google Maps · Routes are suggestions only — always ride safely."
-msgstr "Mogelijk gemaakt door Google Maps · Routes zijn suggesties — rij altijd veilig."
+msgid "Map data &copy; %s contributors &middot; Routes are suggestions only &mdash; always ride safely."
+msgstr "Kaartgegevens &copy; %s bijdragers &middot; Routes zijn suggesties — rij altijd veilig."
 
 #: front-page.php
 msgid "Motorcycle Route Planner"
@@ -227,8 +227,9 @@ msgid "How the route generation works"
 msgstr "Hoe de routegeneratie werkt"
 
 #: page-about.php
-msgid "RideLoop uses the %s to calculate routes. When you select \"Twisties / Scenic,\" we bias the waypoints away from major highways and toward rural and secondary roads. When you choose \"Highways,\" we optimize for speed. The result is always a closed loop — you end exactly where you started."
-msgstr "RideLoop gebruikt de %s om routes te berekenen. Wanneer je \"Bochtig / Schilderachtig\" selecteert, sturen we de waypoints weg van grote snelwegen en richting landelijke secundaire wegen. Bij \"Snelwegen\" optimaliseren we op snelheid. Het resultaat is altijd een gesloten ronde — je eindigt precies waar je begon."
+#. translators: 1: OSRM link, 2: OpenStreetMap link
+msgid "RideLoop uses %1$s (Open Source Routing Machine) and %2$s to calculate routes. When you select \"Twisties / Scenic,\" we bias the waypoints away from major highways and toward rural and secondary roads. When you choose \"Highways,\" we optimize for speed. The result is always a closed loop — you end exactly where you started."
+msgstr "RideLoop gebruikt %1$s (Open Source Routing Machine) en %2$s om routes te berekenen. Wanneer je \"Bochtig / Schilderachtig\" selecteert, sturen we de waypoints weg van grote snelwegen en richting landelijke secundaire wegen. Bij \"Snelwegen\" optimaliseren we op snelheid. Het resultaat is altijd een gesloten ronde — je eindigt precies waar je begon."
 
 #: page-about.php
 msgid "Once your route is generated, you can export it directly to Google Maps with all waypoints encoded in the URL — no account required, works on any device, compatible with Android Auto and CarPlay."
@@ -239,8 +240,8 @@ msgid "Privacy"
 msgstr "Privacy"
 
 #: page-about.php
-msgid "RideLoop runs entirely client-side. Your location is used only to center the map and pre-fill the starting address — it is never stored on our servers. All routing is handled directly between your browser and Google Maps."
-msgstr "RideLoop draait volledig in je browser. Je locatie wordt alleen gebruikt om de kaart te centreren en het startadres in te vullen — het wordt nooit opgeslagen op onze servers. Alle routering verloopt rechtstreeks tussen je browser en Google Maps."
+msgid "RideLoop runs entirely client-side. Your location is used only to center the map and pre-fill the starting address — it is never stored on our servers. All routing is handled directly between your browser and open routing services."
+msgstr "RideLoop draait volledig in je browser. Je locatie wordt alleen gebruikt om de kaart te centreren en het startadres in te vullen — het wordt nooit opgeslagen op onze servers. Alle routering verloopt rechtstreeks tussen je browser en open routeringsdiensten."
 
 #: page-about.php
 msgid "Try the Planner"
@@ -293,18 +294,6 @@ msgstr "Het lijkt erop dat deze weg niet bestaat. De pagina die je zoekt is verp
 #: 404.php
 msgid "Go Home"
 msgstr "Naar startpagina"
-
-#: page-planner.php
-msgid "Setup required:"
-msgstr "Instelling vereist:"
-
-#: page-planner.php
-msgid "No Google Maps API key is configured."
-msgstr "Er is geen Google Maps API-sleutel geconfigureerd."
-
-#: page-planner.php
-msgid "Go to RideLoop Settings"
-msgstr "Ga naar RideLoop instellingen"
 
 #: page-planner.php
 msgid "Route options"
@@ -594,21 +583,17 @@ msgstr "Interactieve routekaart"
 msgid "Your route will appear here"
 msgstr "Je route verschijnt hier"
 
-#: page-planner.php
-msgid "Map unavailable — API key not configured"
-msgstr "Kaart niet beschikbaar — API-sleutel niet geconfigureerd"
-
 #: functions.php
 msgid "RideLoop Settings"
 msgstr "RideLoop instellingen"
 
 #: functions.php
-msgid "Google Maps Configuration"
-msgstr "Google Maps configuratie"
+msgid "Map Configuration"
+msgstr "Kaartconfiguratie"
 
 #: functions.php
-msgid "Google Maps API Key"
-msgstr "Google Maps API-sleutel"
+msgid "Set the default map center shown before a route is generated."
+msgstr "Stel het standaard kaartcentrum in dat wordt weergegeven voordat een route wordt gegenereerd."
 
 #: functions.php
 msgid "Default Map Center (Latitude)"
@@ -617,14 +602,6 @@ msgstr "Standaard kaartcentrum (breedtegraad)"
 #: functions.php
 msgid "Default Map Center (Longitude)"
 msgstr "Standaard kaartcentrum (lengtegraad)"
-
-#: functions.php
-msgid "Enter your Google Maps API key and optional default map location. The API key must have Maps JavaScript API and Places API enabled."
-msgstr "Voer je Google Maps API-sleutel in en optioneel een standaard kaartlocatie. De API-sleutel moet de Maps JavaScript API en Places API hebben ingeschakeld."
-
-#: functions.php
-msgid "Required for map display, route planning, and location autocomplete."
-msgstr "Vereist voor kaartweergave, routeplanning en locatie automatisch aanvullen."
 
 #: functions.php
 msgid "Fallback latitude if geolocation is not available (default: 52.0907 — Utrecht)."
@@ -639,21 +616,9 @@ msgid "Settings saved successfully."
 msgstr "Instellingen succesvol opgeslagen."
 
 #: functions.php
-msgid "Quick Setup Guide"
-msgstr "Snelle installatiegids"
+msgid "About the Map"
+msgstr "Over de kaart"
 
 #: functions.php
-msgid "Go to Google Cloud Console and create or select a project."
-msgstr "Ga naar de Google Cloud Console en maak een project aan of selecteer er een."
-
-#: functions.php
-msgid "Enable: Maps JavaScript API, Places API, and Directions API."
-msgstr "Schakel in: Maps JavaScript API, Places API en Directions API."
-
-#: functions.php
-msgid "Create an API key and restrict it to your domain for security."
-msgstr "Maak een API-sleutel aan en beperk deze tot je domein voor veiligheid."
-
-#: functions.php
-msgid "Paste the key above and save."
-msgstr "Plak de sleutel hierboven en sla op."
+msgid "RideLoop uses OpenStreetMap for the map display and OSRM for route calculation — no API key required. The \"Open in Google Maps\" export button works without a key as well."
+msgstr "RideLoop gebruikt OpenStreetMap voor de kaartweergave en OSRM voor routeberekening — geen API-sleutel nodig. De knop \"Openen in Google Maps\" werkt ook zonder sleutel."
